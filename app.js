@@ -24,10 +24,10 @@ const session = require('express-session');
 const { ExpressOIDC } = require('@okta/oidc-middleware');
 
 const oidc = new ExpressOIDC({
-  issuer: oktaConfig.oktaAppSettings.issuer,
-  client_id: oktaConfig.oktaAppSettings.client_id,
-  client_secret: oktaConfig.oktaAppSettings.client_secret,
-  redirect_uri: oktaConfig.oktaAppSettings.redirect_uri,
+  issuer: process.env.ISSUER,
+  client_id: process.env.CLIENT_ID,
+  client_secret: process.env.CLIENT_SECRET,
+  redirect_uri: process.env.REDIRECT_URI,
   scope: 'openid profile'
 });
 

@@ -1,9 +1,9 @@
 {
-  "name": "bankinguiapp",
-  "version": "0.0.0",
+  "name": "AVBank",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node app.js"
+    "start": "node server.js"
   },
   "dependencies": {
     "@okta/jwt-verifier": "0.0.11",
