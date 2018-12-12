@@ -1,0 +1,515 @@
+<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE HTML>
+<html lang="zxx">
+
+<head>
+  <title><%= user %></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+  <meta name="keywords" content="AVBank Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
+  SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design"
+  />
+  <script>
+  addEventListener("load", function () {
+    setTimeout(hideURLbar, 0);
+  }, false);
+
+  function hideURLbar() {
+    window.scrollTo(0, 1);
+  }
+  </script>
+  <!-- Bootstrap Core CSS -->
+  <link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
+  <!-- Custom CSS -->
+  <link href="css/style.css" rel='stylesheet' type='text/css' />
+  <!-- font-awesome icons -->
+  <link href="css/fontawesome-all.min.css" rel="stylesheet">
+  <!-- //Custom Theme files -->
+  <!--webfonts-->
+  <link href="//fonts.googleapis.com/css?family=Do+Hyeon" rel="stylesheet">
+  <link href="//fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i"
+  rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script>
+  <script src="https://ok1static.oktacdn.com/assets/js/sdk/okta-auth-js/1.17.0/okta-auth-js.min.js"type="text/javascript"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+  <link
+  href="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/2.13.0/css/okta-sign-in.min.css"
+  type="text/css"
+  rel="stylesheet"/>
+
+  <script
+  src="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/2.13.0/js/okta-sign-in.min.js"
+  type="text/javascript"></script>
+
+  <!-- Theme file: Customize or replace this file if you want to override our default styles -->
+  <link
+  href="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/2.13.0/css/okta-theme.css"
+  type="text/css"
+  rel="stylesheet"/>
+  <style>
+  .button {
+    display: block;
+    width: 115px;
+    height: 100%;
+    background: #CB444B;
+    padding: 10px;
+    text-align: center;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+}
+  </style>
+  <!-- //webfonts -->
+
+</head>
+
+<body>
+  <!-- header -->
+  <header>
+    <div class="container">
+      <!-- nav -->
+      <nav class="navbar navbar-expand-lg navbar-light py-4">
+        <!-- logo -->
+        <h1>
+          <a class="navbar-brand" href="index">
+            AVBank
+          </a>
+        </h1>
+        <!-- //logo -->
+        <button class="navbar-toggler ml-md-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <!-- main nav -->
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-lg-auto text-center">
+          <li class="nav-item mr-lg-3">
+            <a class="nav-link" href="index">Home
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item mr-lg-3">
+            <a class="nav-link" href="about">about</a>
+          </li>
+          <li class="dropdown nav-item">
+            <a href="#" data-toggle="dropdown" class="nav-link">
+              Pages
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu multi-level" role="menu">
+              <li class="nav-item">
+                <a href="portfolio" class="nav-link">Portfolio</a>
+              </li>
+              <li class="dropdown-submenu">
+                <a tabindex="-1" href="#" class="nav-link">Blog</a>
+                <ul class="dropdown-menu">
+                  <li class="dropdown-submenu">
+                    <a href="#" class="nav-link">Layout 1</a>
+                    <ul class="dropdown-menu">
+                      <li class="nav-item">
+                        <a href="blog3_style1" class="nav-link">Left Sidebar</a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="blog3_style2" class="nav-link">Right Sidebar</a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="blog3_style3" class="nav-link">Without Sidebar</a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li class="dropdown-submenu">
+                    <a href="#" class="nav-link">Layout 2</a>
+                    <ul class="dropdown-menu">
+                      <li class="nav-item">
+                        <a href="blog2_style1" class="nav-link">Left Sidebar</a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="blog2_style2" class="nav-link">Right Sidebar</a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="blog2_style3" class="nav-link">Without Sidebar</a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li class="dropdown-submenu">
+                    <a href="#" class="nav-link">Layout 3</a>
+                    <ul class="dropdown-menu">
+                      <li class="nav-item">
+                        <a href="blog_row_style1" class="nav-link">Left Sidebar</a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="blog_row_style2" class="nav-link">Right Sidebar</a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="blog_row_style3" class="nav-link">Without Sidebar</a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li class="dropdown-submenu">
+                    <a href="#" class="nav-link">Layout 4</a>
+                    <ul class="dropdown-menu">
+                      <li class="nav-item">
+                        <a href="blog_col_style1" class="nav-link">Left Sidebar</a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="blog_col_style2" class="nav-link">Right Sidebar</a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="blog_col_style3" class="nav-link">Without Sidebar</a>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a href="soon" class="nav-link">Coming soon</a>
+              </li>
+              <li class="nav-item">
+                <a href="maintenance" class="nav-link">Maintenance</a>
+              </li>
+              <li class="nav-item">
+                <a href="error" class="nav-link">404</a>
+              </li>
+              <li class="nav-item">
+                <a href="typo" class="nav-link">Typography</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item mr-lg-3 active">
+            <a class="nav-link" href="services">Services</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="contact">contact</a>
+          </li>
+          <li>
+            <button type="button" class="btn btn-danger ml-lg-5 w3ls-btn" data-toggle="modal" aria-pressed="false" data-target="#exampleModal">
+              Security Settings
+            </button>
+          </li>
+          <li>
+            <a class="button" href="https://login.vanbeeklabs.com/login/signout?fromURI=http://localhost:3000/logout" class="item">
+              Sign Out
+            </a>
+          </li>
+        </ul>
+      </div>
+      <!-- //main nav -->
+    </nav>
+    <!-- //nav -->
+  </div>
+</header>
+<!-- //header -->
+<!-- inner banner -->
+
+<!-- //inner banner -->
+<!-- breadcrumbs -->
+
+<!-- //breadcrumbs -->
+<!-- title description-->
+<%- include partials/accountActions.ejs %>
+
+<%- include partials/smsMfaModal.ejs %>
+<%- include partials/openAccount.ejs %>
+<div class="services-bot-agile2 py-sm-5 py-3">
+  <button type="button" onclick="openAccount()" class="btn btn-danger btn-lg float-right">Open Account</button>
+  <div class="row py-lg-5">
+
+    <div class="col-lg-2  bb-left">
+      <div class="card w-100">
+        <img class="card-img-top" src="/images/userImage.jpg" alt="Card image cap">
+      </div>
+
+    </div>
+    <div class="col-lg-7">
+      <h2 class="agile-title"><%= user.name %></h2>
+      <h6><%= user.preferred_username %></h6>
+      <br>
+      <h4>Open Accounts: <span id="accountNum">0</span></h4>
+      <h4>Closed Accounts: <span id="closedAccountNum">0</span></h4>
+      <h4>Transactions <span id="transactionNum">0</span></h4>
+    </div>
+  </div>
+</div>
+<!-- //title description -->
+<!-- Services section -->
+<section class="wfour-row py-sm-5 pt-3 slide-bg position-relative transactions" id="we_offer_agile">
+  <div class="container py-md-5 py-3">
+    <div class="services-bot-agile position-absolute">
+      <br>
+      <h3 class="agile-title text-center" style="color: White;">Accounts</h3>
+      <div id="app" class="row mt-5">
+        <account-item v-for="account in accounts" :account="account" :key="account._id"/>
+      </div>
+    </div>
+  </div>
+</section>
+<section>
+  <center><h3>Transactions</h3></center>
+  <table class="table table-dark table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">First</th>
+        <th scope="col">Last</th>
+        <th scope="col">Handle</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">1</th>
+        <td>Mark</td>
+        <td>Otto</td>
+        <td>@mdo</td>
+      </tr>
+      <tr>
+        <th scope="row">2</th>
+        <td>Jacob</td>
+        <td>Thornton</td>
+        <td>@fat</td>
+      </tr>
+      <tr>
+        <th scope="row">3</th>
+        <td>Larry</td>
+        <td>the Bird</td>
+        <td>@twitter</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- /Services section -->
+<!-- footer top -->
+<section class="footerw3-top py-lg-5">
+  <div class="container py-md-5">
+    <!-- footer top row -->
+    <div class="row py-5">
+      <div class="col-md-4">
+        <img src="images/f1.png" alt="" class="img-fluid">
+        <h4 class="feed-title my-3">Email and Live chat
+          <span>24/7</span>
+        </h4>
+        <p> ligula sed magna as ultriciesDonec rutrum congue leo eget.</p>
+      </div>
+      <div class="col-md-4 my-md-0 my-4">
+        <img src="images/f2.png" alt="" class="img-fluid">
+        <h4 class="feed-title my-3">any query or clarifiactions?
+          <span>call us</span>
+        </h4>
+        <p class="mb-0">+ 10 000 12345 </p>
+        <p>+ 10 000 12346 </p>
+      </div>
+      <div class="col-md-4">
+        <img src="images/f3.png" alt="" class="img-fluid">
+        <h4 class="feed-title my-3">creative thoughts
+          <span>informatics</span>
+        </h4>
+        <p>Ras ultricies ligula sed magna Donec rutrum congue leo eget.</p>
+      </div>
+
+    </div>
+    <!-- //footer top row -->
+  </div>
+</section>
+
+<!-- footer top -->
+<!-- footer -->
+<footer class="py-sm-5">
+  <div class="container">
+    <div class="row py-5">
+      <!-- footer grid1 -->
+      <div class="col-lg-3 col-sm-6">
+        <h2>
+          <a class="navbar-brand" href="index">
+            AVBank
+          </a>
+        </h2>
+        <div class="fv3-contact mt-3">
+          <span class="fas fa-home mr-2"></span>
+          <p>90 Street, City, State 34789.</p>
+        </div>
+        <div class="fv3-contact">
+          <span class="fas fa-phone-volume mr-2"></span>
+          <p>+456 123 7890</p>
+        </div>
+        <div class="fv3-contact">
+          <span class="fas fa-envelope-open mr-2"></span>
+          <a href="mailto:example@email.com" class="text-secondary">info@example.com</a>
+        </div>
+      </div>
+      <!-- //footer grid1 -->
+      <!-- footer grid2 -->
+      <div class="col-lg-3  col-sm-6 footv3-left text-lg-center my-sm-0 mt-5">
+        <h3 class="mb-3">our services</h3>
+        <ul class="list-agileits">
+          <li>
+            <a href="index">
+              quality resourcing
+            </a>
+          </li>
+          <li class="my-3">
+            <a href="about">
+              inventory tracking
+            </a>
+          </li>
+          <li class="mb-3">
+            <a href="services">
+              financial planning
+            </a>
+          </li>
+          <li>
+            <a href="contact">
+              budget friendly
+            </a>
+          </li>
+        </ul>
+      </div>
+      <!-- //footer grid2 -->
+      <!-- footer grid3 -->
+      <div class="col-lg-3  col-sm-6 footv3-left text-lg-center my-lg-0 mt-sm-5 mt-5">
+        <h3 class="mb-3">Navigation</h3>
+        <ul class="list-agileits">
+          <li>
+            <a href="index">
+              Home
+            </a>
+          </li>
+          <li class="my-3">
+            <a href="about">
+              About Us
+            </a>
+          </li>
+          <li class="mb-3">
+            <a href="services">
+              Services
+            </a>
+          </li>
+          <li>
+            <a href="contact">
+              Contact Us
+            </a>
+          </li>
+        </ul>
+      </div>
+      <!-- //footer grid3 -->
+      <!-- footer grid4  -->
+      <div class="col-lg-3  col-sm-6 footv3-left my-lg-0 mt-5">
+        <h3 class="mb-3">subscribe to newsletter</h3>
+        <form action="#" method="post">
+          <div class="form-group">
+            <input type="email" class="form-control  bg-dark border-0" id="email" placeholder="Enter email" name="email" required>
+          </div>
+          <div class="form-group">
+            <input type="Submit" class="form-control bg-secondary text-white border-0" id="sub" value="submit" name="sub">
+          </div>
+        </form>
+      </div>
+      <!-- //footer grid4 -->
+    </div>
+    <div class="cpy-right text-center  pt-5 pb-sm-0 pb-3">
+      <p class="text-secondary">© 2018 AVBank. All rights reserved | Design by
+        <a href="http://w3layouts.com" class="text-white"> W3layouts.</a>
+      </p>
+    </div>
+  </div>
+  <!-- //footer container -->
+</footer>
+<!-- //footer -->
+<!-- Login modal -->
+<div class="modal fade general-modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg general-modal" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Your Security Preferences</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body general-modal">
+        <center>
+          <h3>Your Enrolled Factors</h3>
+          <br>
+          <div id="factorsApp" class="btn-group-vertical">
+            <factor-item v-for="factor in factors" :factor="factor" :key="factor._id"/>
+          </div>
+          <br>
+          <br>
+          <button class='btn btn-danger' onclick="resetMfa()">reset MFA</button>
+          <button class='btn btn-danger' onclick="reEnroll()">renroll</button>
+        </center>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- //Login modal -->
+<!-- Register modal -->
+<div class="modal fade general-modal" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel1">Sign In to Renenroll</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body general-modal">
+        <div id="okta"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- // Register modal -->
+<!-- subscribe form -->
+<div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel2">Subscribe now!</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="#" method="post">
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Email</label>
+            <input type="email" class="form-control border" placeholder=" " name="email" id="usermail" required="">
+          </div>
+          <div class="right-w3l">
+            <input type="submit" class="form-control text-white" value="Subscribe">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- //subscribe form -->
+<!-- js-->
+
+<script src="js/accountVue.js"></script>
+<script src="js/jquery-2.2.3.min.js"></script>
+<!--  magnific-popup  -->
+<!-- <script src="js/jquery.magnific-popup.js"></script> -->
+<!-- move-top -->
+<script src="js/move-top.js"></script>
+<!-- easing -->
+<script src="js/easing.js"></script>
+<!-- smooth scroll -->
+<script src="js/SmoothScroll.min.js"></script>
+<!--  necessary snippets for few javascript files -->
+<script src="js/Avbank.js"></script>
+<!-- Bootstrap Core JavaScript -->
+<script src="js/bootstrap.js "></script>
+<script src="js/OktaAuth.js "></script>
+
+
+
+
+</body>
+
+</html>
