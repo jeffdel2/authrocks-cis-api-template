@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+// JPF: Clean up this file and remove it when possible 
+
 /**
  * Module dependencies.
  */
