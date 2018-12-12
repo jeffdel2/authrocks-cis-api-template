@@ -1,14 +1,14 @@
- var express = require('express');
+var express = require('express');
 var router = express.Router();
 const session = require('express-session');
 const { ExpressOIDC } = require('@okta/oidc-middleware');
 var oktaConfig = require('config.json')('./oktaconfig.json');
 
 const oidc = new ExpressOIDC({
-  issuer: oktaConfig.oktaAppSettings.issuer,
-  client_id: oktaConfig.oktaAppSettings.client_id,
-  client_secret: oktaConfig.oktaAppSettings.client_secret,
-  redirect_uri: oktaConfig.oktaAppSettings.redirect_uri,
+  issuer: process.env.ISSUER,
+  client_id: process.env.CLIENT_ID,
+  client_secret: process.env.CLIENT_SECRET,
+  redirect_uri: process.env.REDIRECT_URI,
   scope: 'openid profile'
 });
 
@@ -18,18 +18,18 @@ console.log(oidc)
 const OktaJwtVerifier = require('@okta/jwt-verifier');
 
 const oktaJwtVerifier = new OktaJwtVerifier({
-  issuer: ' oktaConfig.oktaAppSettings.issuer'
+  issuer: process.env.issuer
 })
 
 const okta = require('@okta/okta-sdk-nodejs');
 
 const client = new okta.Client({
-  orgUrl: oktaConfig.oktaAppSettings.oktaUrl,
-  token: oktaConfig.oktaAppSettings.apiToken,    // Obtained from Developer Dashboard
+  orgUrl: process.env.OKTA_URL,
+  token: process.env.OKTA_API_TOKEN,    // Obtained from Developer Dashboard
   requestExecutor: new okta.DefaultRequestExecutor() // Will be added by default in 2.0
 });
 
-const apiToken = oktaConfig.oktaAppSettings.apiToken
+const apiToken = process.env.OKTA_API_TOKEN;
 var sendToAccounts = function(amount, id, responseFromMFA){
   var request = require("request");
 
