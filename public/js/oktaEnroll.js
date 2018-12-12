@@ -1,3 +1,4 @@
+// FIXME: Generate this dynamically, or perhaps geneate via .ejs
 $( document ).ready(function() {
   $("#okta").show()
 

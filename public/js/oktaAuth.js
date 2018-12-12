@@ -1,4 +1,4 @@
-
+// FIXME: Create a route to generate this dynamically, or perhaps geneate via .ejs
 
 var config = {
   url: 'https://login.vanbeeklabs.com',

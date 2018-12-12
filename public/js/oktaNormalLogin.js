@@ -1,3 +1,5 @@
+// FIXME: Generate this dynamically, or perhaps geneate via .ejs
+
 // window.alert("test")
 
 var config = {
