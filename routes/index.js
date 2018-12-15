@@ -30,6 +30,9 @@ const client = new okta.Client({
 });
 
 const apiToken = process.env.OKTA_API_TOKEN;
+
+const assetsUrl = "https://cdn.glitch.com/" + process.env.PROJECT_ID + "%2F"
+
 var sendToAccounts = function(amount, id, responseFromMFA){
   var request = require("request");
 
@@ -52,7 +55,7 @@ var sendToAccounts = function(amount, id, responseFromMFA){
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.render('index', { title: 'Express', assetsUrl: assetsUrl });
 });
 
 router.get('/accountPage', oidc.ensureAuthenticated(), (req, res, next) => {
@@ -60,7 +63,7 @@ router.get('/accountPage', oidc.ensureAuthenticated(), (req, res, next) => {
   oktaJwtVerifier.verifyAccessToken(req.userContext.tokens.access_token)
   .catch(jwt => {
     console.log(jwt.parsedBody.factorId)
-    res.render('accountPage', { user: req.userContext.userinfo });
+    res.render('accountPage', { user: req.userContext.userinfo, assetsUrl: assetsUrl });
   });
 
 });
@@ -173,38 +176,38 @@ router.post('/factorsTest', oidc.ensureAuthenticated(), (req, res, next) => {
 });
 
 router.get('/index', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.render('index', { title: 'Express', assetsUrl: assetsUrl });
 });
 
 router.get('/about', function(req, res, next) {
-  res.render('about', { title: 'Express' });
+  res.render('about', { title: 'Express', assetsUrl: assetsUrl });
 });
 
 router.get('/contact', function(req, res, next) {
-  res.render('contact', { title: 'Express' });
+  res.render('contact', { title: 'Express', assetsUrl: assetsUrl });
 });
 
 
 router.get('/services', function(req, res, next) {
-  res.render('services', { title: 'Express' });
+  res.render('services', { title: 'Express', assetsUrl: assetsUrl });
 });
 
 
 router.get('/widget', function(req, res, next) {
-  res.render('single', { title: 'Express' });
+  res.render('single', { title: 'Express', assetsUrl: assetsUrl });
 });
 
 router.get('/portfolio', function(req, res, next) {
-  res.render('portfolio', { title: 'Express' });
+  res.render('portfolio', { title: 'Express', assetsUrl: assetsUrl });
 });
 
 router.get('/single', function(req, res, next) {
-  res.render('single', { title: 'Express' });
+  res.render('single', { title: 'Express', assetsUrl: assetsUrl });
 });
 
 
 router.get('/blog', function(req, res, next) {
-  res.render('blog_row_style3', { title: 'Express' });
+  res.render('blog_row_style3', { title: 'Express', assetsUrl: assetsUrl });
 });
 
 
