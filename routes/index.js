@@ -39,7 +39,7 @@ var sendToAccounts = function(amount, id, responseFromMFA){
   var options = { method: 'PUT',
   url: 'https://okta-example-playground.appspot.com/accounts/' + id,
   headers:
-  { 'Postman-Token': '965cd78e-ffd6-ad90-0298-a45f52a4be1a',
+  {
   'Cache-Control': 'no-cache',
   'Content-Type': 'application/x-www-form-urlencoded' },
   form: { requestedAmount: amount } };
@@ -74,7 +74,7 @@ router.post('/resetMfa', oidc.ensureAuthenticated(), (req, res, next) => {
   var options = { method: 'DELETE',
   url:  oktaConfig.oktaAppSettings + '/api/v1/users/' + req.userContext.userinfo.sub  + '/factors/' + req.userContext.userinfo.smsFactor,
   headers:
-  { 'postman-token': '06a11761-4802-fd20-8548-907e852e3083',
+  { 
   'cache-control': 'no-cache',
   authorization: 'SSWS ' + apiToken,
   'content-type': 'application/json',
@@ -97,7 +97,7 @@ router.get('/factors', function(req, res, next) {
   var options = { method: 'GET',
   url: oktaConfig.oktaAppSettings + '/api/v1/users/' + req.userContext.userinfo.sub +'/factors',
   headers:
-  { 'Postman-Token': '6f68bb39-986c-1757-14a1-472a141b77fe',
+  { 
   'Cache-Control': 'no-cache',
   Authorization: 'SSWS ' + apiToken,
   'Content-Type': 'application/json',
@@ -155,7 +155,7 @@ router.post('/factorsTest', oidc.ensureAuthenticated(), (req, res, next) => {
     var options = { method: 'POST',
     url: url,
     headers:
-    { 'Postman-Token': '22423508-224d-95be-aa21-2006f0b9162c',
+    {
     'Cache-Control': 'no-cache',
     Authorization: 'SSWS ' + apiToken,
     'Content-Type': 'application/json',

@@ -15,3 +15,4 @@
 - ☐ Consider using EJS for setup of the Okta Sign-In Widget
 - ☐ Merge `app.js` and `server.js`
 - ☐ Fix /maintenance
+- ☐ DRY up routes/index.js
