@@ -22,6 +22,7 @@ var oktaConfig = require('config.json')('./oktaconfig.json');
 
 const session = require('express-session');
 const { ExpressOIDC } = require('@okta/oidc-middleware');
+const assetsUrl = "https://cdn.glitch.com/" + process.env.PROJECT_ID + "%2F"
 
 const oidc = new ExpressOIDC({
   issuer: process.env.ISSUER,
