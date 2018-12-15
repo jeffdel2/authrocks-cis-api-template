@@ -207,7 +207,7 @@ router.get('/single', function(req, res, next) {
 
 
 router.get('/blog', function(req, res, next) {
-  res.render('blog_row_style3', { title: 'Express', assetsUrl: assetsUrl });
+  res.render('blog', { title: 'Express', assetsUrl: assetsUrl });
 });
 
 
