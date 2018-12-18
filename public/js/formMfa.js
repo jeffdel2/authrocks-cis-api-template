@@ -1,3 +1,5 @@
+// Important
+// 
 var showActions = function(account) {
   var span = $(account).children()[0]
   var id = $(span).text()

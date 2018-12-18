@@ -1,4 +1,5 @@
-
+// exampleModal1 is the first modal "Do you want to take out money"
+// Where the withdraw form comes from
 var reEnroll = function() {
   $("#exampleModal1").modal("show")
 }
