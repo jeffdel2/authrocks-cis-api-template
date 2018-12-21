@@ -111,9 +111,13 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 								window.location = "/accountPage"
 							}
 							</script>
-							<button id="login" onclick="toLogin()" type="button" class="btn btn-danger ml-lg-5 w3ls-btn" data-toggle="modal" aria-pressed="false">
+           <% if(user){ %>
+             <h1>foo</h1>
+            <% } else{ %>  
+             	<button id="login" onclick="toLogin()" type="button" class="btn btn-danger ml-lg-5 w3ls-btn" data-toggle="modal" aria-pressed="false">
 								Login
 							</button>
+                <% } %>
 						</li>
 					</ul>
 				</div>
