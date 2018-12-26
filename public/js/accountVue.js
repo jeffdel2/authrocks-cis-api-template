@@ -17,7 +17,8 @@ var resetMfa = function() {
 var showActions = function(account) {
   var span = $(account).children()[0]
   var id = $(span).text()
-  $('input[name=id]').val(id);
+  console.log(id)
+  $('#bankAccount').val(id);
   $('#withdrawForm').submit(function(e){
     e.preventDefault();
     $.ajax({
