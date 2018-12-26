@@ -72,7 +72,7 @@ router.post('/resetMfa', oidc.ensureAuthenticated(), (req, res, next) => {
   var request = require("request");
 
   var options = { method: 'DELETE',
-  url:  oktaConfig.oktaAppSettings + '/api/v1/users/' + req.userContext.userinfo.sub  + '/factors/' + req.userContext.userinfo.smsFactor,
+  url:  oktaConfig.oktaAppSettings.OKTA_URL + '/api/v1/users/' + req.userContext.userinfo.sub  + '/factors/' + req.userContext.userinfo.smsFactor,
   headers:
   { 
   'cache-control': 'no-cache',
@@ -95,7 +95,7 @@ router.get('/factors', function(req, res, next) {
   var request = require("request");
   console.log(req.userContext.userinfo)
   var options = { method: 'GET',
-  url: oktaConfig.oktaAppSettings + '/api/v1/users/' + req.userContext.userinfo.sub +'/factors',
+  url: oktaConfig.oktaAppSettings.OKTA_URL + '/api/v1/users/' + req.userContext.userinfo.sub +'/factors',
   headers:
   { 
   'Cache-Control': 'no-cache',
