@@ -22,7 +22,7 @@ var showActions = function(account) {
   $('#withdrawForm').submit(function(e){
     e.preventDefault();
     $.ajax({
-      url:'http://localhost:3000/factorsTest',
+      url:'https://avbank.glitch.me/factorsTest',
       type:'post',
       success:function(){
         var formData = $('#withdrawForm').serialize()
@@ -99,7 +99,7 @@ new Vue({
   methods: {
     loadFactors: function() {
       window.alert("test")
-      this.$http.get('http://localhost:3000/factors')
+      this.$http.get('https://avbank.glitch.me/factors')
       .then(response => {
         this.factors = response.body
         $(".button-primary").css("background", "linear-gradient(red, #f00000)");
@@ -108,7 +108,7 @@ new Vue({
     },
     postFactors: function() {
       console.log("test")
-      this.$http.post('http://localhost:3000/factorsTest').then(response => {
+      this.$http.post('https://avbank.glitch.me/factorsTest').then(response => {
         console.log(response.body)
       })
     }
