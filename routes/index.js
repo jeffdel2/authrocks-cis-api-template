@@ -37,14 +37,16 @@ const assetsUrl = "https://cdn.glitch.com/" + process.env.PROJECT_ID + "%2F"
 
 var sendToAccounts = function(amount, id, responseFromMFA){
   var request = require("request");
-
+  console.log(amount)
+  console.log(id)
   var options = { method: 'PUT',
   url: 'https://okta-example-playground.appspot.com/accounts/' + id,
   headers:
   {
   'Cache-Control': 'no-cache',
   'Content-Type': 'application/x-www-form-urlencoded' },
-  form: { requestedAmount: amount } };
+  body: { requestedAmount: amount },
+  json: true };
 
   request(options, function (error, response, body) {
     if (error) throw new Error(error);
