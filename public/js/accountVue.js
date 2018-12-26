@@ -6,7 +6,7 @@ var reEnroll = function() {
 
 var resetMfa = function() {
   $.ajax({
-    url:'http://localhost:3000/resetMfa',
+    url:'/resetMfa',
     type:'post',
     success:function(){
 
@@ -22,7 +22,7 @@ var showActions = function(account) {
   $('#withdrawForm').submit(function(e){
     e.preventDefault();
     $.ajax({
-      url:'https://avbank.glitch.me/factorsTest',
+      url:'/factorsTest',
       type:'post',
       success:function(){
         var formData = $('#withdrawForm').serialize()
@@ -33,14 +33,14 @@ var showActions = function(account) {
         formData["Withdrawal"] = amountData
         console.log(formData)
         $('#mfaModal').modal('show');
-        $('#modalForm').submit(function(e){
+        $('#smsMfaModal').submit(function(e){
           e.preventDefault();
           $.ajax({
-            url:'http://localhost:3000/factorsTest',
+            url:'/factorsTest',
             type:'post',
-            data:$('#modalForm, #withdrawForm').serialize(),
-            success:function(){
-              window.location.reload()
+            data:$('#smsMfaModal, #withdrawForm').serialize(),
+            success:function(data){
+              console.log(data)
             }
           });
         });
@@ -130,7 +130,7 @@ new Vue({
       {el: '#okta'},
       function success(res) {
         console.log(res)
-        window.location.reload()
+       
       },
       function error(err) {
         console.log(err)
