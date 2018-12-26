@@ -98,7 +98,7 @@ new Vue({
   ,
   methods: {
     loadFactors: function() {
-      console.log("test")
+      window.alert("test")
       this.$http.get('http://localhost:3000/factors')
       .then(response => {
         this.factors = response.body
