@@ -15,7 +15,7 @@ const oidc = new ExpressOIDC({
 
 console.log(oidc)
 var oktaTenantUrl = process.env.OKTA_URL
-console.log(url)
+
 
 const OktaJwtVerifier = require('@okta/jwt-verifier');
 
