@@ -39,14 +39,16 @@ var sendToAccounts = function(amount, id, responseFromMFA){
   var request = require("request");
   console.log(amount)
   console.log(id)
-  var options = { method: 'PUT',
+ var options = { method: 'PUT',
   url: 'https://okta-example-playground.appspot.com/accounts/' + id,
-  headers:
-  {
-  'Cache-Control': 'no-cache',
-  'Content-Type': 'application/x-www-form-urlencoded' },
-  body: { requestedAmount: amount },
-  json: true };
+  headers: 
+   { 'Postman-Token': '0cf3d312-5f64-1eeb-fd94-7f4cd46a60ab',
+     'Cache-Control': 'no-cache',
+     Authorization: 'SSWS {{apikey}}',
+     'Content-Type': 'application/x-www-form-urlencoded',
+     Accept: 'application/json' },
+  form: { requestedAmount: '500' } };
+
 
   request(options, function (error, response, body) {
     if (error) throw new Error(error);
