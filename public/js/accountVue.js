@@ -131,7 +131,7 @@ new Vue({
       {el: '#okta'},
       function success(res) {
         console.log(res)
-       
+       window.location.reload()
       },
       function error(err) {
         console.log(err)
