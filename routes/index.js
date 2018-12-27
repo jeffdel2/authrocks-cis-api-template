@@ -39,8 +39,10 @@ var sendToAccounts = function(amount, id, responseFromMFA){
   var request = require("request");
   console.log(amount)
   console.log(id)
+  var putUrl = 'https://okta-example-playground.appspot.com/accounts/' + id
+  console.log(putUrl)
  var options = { method: 'PUT',
-  url: 'https://okta-example-playground.appspot.com/accounts/' + id,
+  url: putUrl,
   headers: 
    { 'Postman-Token': '0cf3d312-5f64-1eeb-fd94-7f4cd46a60ab',
      'Cache-Control': 'no-cache',
@@ -151,6 +153,8 @@ router.post('/factorsTest', oidc.ensureAuthenticated(), (req, res, next) => {
   var request = require("request");
   console.log("test")
   console.log(req.body)
+  var bankId = req.body.bankAccount
+  var requestedAmount = req.body.requestedAmount
   var smsCode = {"passCode": req.body.passCode }
 
   oktaJwtVerifier.verifyAccessToken(req.userContext.tokens.access_token)
@@ -173,7 +177,11 @@ router.post('/factorsTest', oidc.ensureAuthenticated(), (req, res, next) => {
       if (error) throw new Error(error);
       console.log(body.factorResult)
       if(body.factorResult == "SUCCESS"){
-        sendToAccounts(req.body.requestedAmount, req.body.id, res)
+        console.log("################")
+        console.log(req.body.id,)
+        console.log(req.body.requestedAmount)
+        console.log("################")
+        sendToAccounts(requestedAmount, bankId, res)
       } else {
         res.send(body)
       }
