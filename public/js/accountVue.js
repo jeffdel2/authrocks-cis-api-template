@@ -41,6 +41,7 @@ var showActions = function(account) {
             data:$('#smsMfaModal, #withdrawForm').serialize(),
             success:function(data){
               console.log(data)
+              window.location.reload()
             }
           });
         });

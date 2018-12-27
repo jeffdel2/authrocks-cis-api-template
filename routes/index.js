@@ -49,7 +49,7 @@ var sendToAccounts = function(amount, id, responseFromMFA){
      Authorization: 'SSWS {{apikey}}',
      'Content-Type': 'application/x-www-form-urlencoded',
      Accept: 'application/json' },
-  form: { requestedAmount: '500' } };
+  form: { requestedAmount: amount } };
 
 
   request(options, function (error, response, body) {
@@ -177,10 +177,8 @@ router.post('/factorsTest', oidc.ensureAuthenticated(), (req, res, next) => {
       if (error) throw new Error(error);
       console.log(body.factorResult)
       if(body.factorResult == "SUCCESS"){
-        console.log("################")
         console.log(req.body.id,)
         console.log(req.body.requestedAmount)
-        console.log("################")
         sendToAccounts(requestedAmount, bankId, res)
       } else {
         res.send(body)
