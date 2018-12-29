@@ -122,65 +122,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
               <button type="button" class="btn btn-danger ml-lg-5 w3ls-btn" data-toggle="modal" data-target="#exampleModal" aria-pressed="false">
 							  Second Login
 							</button>
-              <script>
-                
-                var config = {
-  url: 'https://login.vanbeeklabs.com',
-  tokenManager: {
-    storage: 'sessionStorage'
-  },
-    issuer: 'https://login.vanbeeklabs.com/oauth2/default',
-    clientId: '0oahikuahrKHsYSTZ0h7',
-    redirectUri: 'http://localhost:3000/authorization-code/callback',
-
-    // Override the default authorize and userinfo URLs
-    authorizeUrl: 'https://login.vanbeeklabs.com/oauth2/default/v1/authorize',
-    userinfoUrl: 'https://login.vanbeeklabs.com/oauth2/default/v1/userinfo'
-};
-
-var validationOptions = {
-  issuer: 'https://login.vanbeeklabs.com/oauth2/default'
-}
-
-
-var authClient = new OktaAuth(config);
-window.alert("TEST")
-$( document ).ready(function() {
-$("#loginForm").submit(function( event ) {
-  event.preventDefault();
-});
-})
-
-authClient.session.get()
-.then(function(session) {
-  console.log(session)
-})
-.catch(function(err) {
-  // not logged in
-});
-
-var do_login = function() {
-
-  authClient.signIn({
-    username: $("input[name='Name']").val(),
-    password: $("input[name='Password']").val()
-  })
-  .then(function(transaction) {
-    if (transaction.status === 'SUCCESS') {
-      // Step #1: get sessionToken
-      console.log('sessionToken = ', transaction.sessionToken);
-
-      authClient.session.setCookieAndRedirect(transaction.sessionToken, "http://localhost:3000/accountPage");
-
-    } else {
-      throw 'We cannot handle the ' + transaction.status + ' status';
-    }
-  })
-  .fail(function(err) {
-    console.error(err);
-  });
-}
-              </script>
                 <% } %>
 						</li>
 					</ul>
