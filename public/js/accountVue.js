@@ -99,7 +99,6 @@ new Vue({
   ,
   methods: {
     loadFactors: function() {
-      window.alert("test")
       this.$http.get('https://avbank.glitch.me/factors')
       .then(response => {
         this.factors = response.body
