@@ -123,6 +123,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 							  Second Login
 							</button>
               <script>
+                
                 var config = {
   url: 'https://login.vanbeeklabs.com',
   tokenManager: {
@@ -143,10 +144,12 @@ var validationOptions = {
 
 
 var authClient = new OktaAuth(config);
-
-$( "#loginForm" ).submit(function( event ) {
+window.alert("TEST")
+$( document ).ready(function() {
+$("#loginForm").submit(function( event ) {
   event.preventDefault();
 });
+})
 
 authClient.session.get()
 .then(function(session) {
