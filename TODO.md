@@ -23,3 +23,5 @@
 - ☐ Nice token viewer upon login
 - ☐ Wrap JWT verifier around the API
 - ☐ Build UI for opening an account? (not on the critical path)
+- ☐ Add friendly error page when the values in `.env` file are incomplete
+    (If the file is empty, the page never loads)
