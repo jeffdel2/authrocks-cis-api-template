@@ -34,6 +34,8 @@ const session = require('express-session');
 const { ExpressOIDC } = require('@okta/oidc-middleware');
 const assetsUrl = "https://cdn.glitch.com/" + process.env.PROJECT_ID + "%2F"
 
+var oidc;
+/*
 const oidc = new ExpressOIDC({
   issuer: process.env.ISSUER,
   client_id: process.env.CLIENT_ID,
@@ -41,7 +43,7 @@ const oidc = new ExpressOIDC({
   redirect_uri: "https://" + process.env.PROJECT_DOMAIN + ".glitch.me/authorization-code/callback",
   scope: 'openid profile'
 });
-
+*/
 
 // session support is required to use ExpressOIDC
 app.use(session({
@@ -98,7 +100,7 @@ var server = http.createServer(app);
  */
 
 server.listen(port);
-server.on('error', onError);
+// server.on('error', onError);
 server.on('listening', onListening);
 
 /**
@@ -126,6 +128,7 @@ function normalizePort(val) {
  */
 
 function onError(error) {
+  console.log("onError called");
   if (error.syscall !== 'listen') {
     throw error;
   }
@@ -154,6 +157,15 @@ function onError(error) {
  */
 
 function onListening() {
+  oidc = new ExpressOIDC({
+    issuer: process.env.ISSUER,
+    client_id: process.env.CLIENT_ID,
+    client_secret: process.env.CLIENT_SECRET,
+    redirect_uri: "https://" + process.env.PROJECT_DOMAIN + ".glitch.me/authorization-code/callback",
+    scope: 'openid profile'
+  });
+
+  
   var addr = server.address();
   var bind = typeof addr === 'string'
     ? 'pipe ' + addr
