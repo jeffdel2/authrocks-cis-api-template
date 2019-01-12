@@ -34,6 +34,9 @@ const session = require('express-session');
 const { ExpressOIDC } = require('@okta/oidc-middleware');
 const assetsUrl = "https://cdn.glitch.com/" + process.env.PROJECT_ID + "%2F"
 
+var oidc; 
+
+/***
 const oidc = new ExpressOIDC({
   issuer: process.env.ISSUER,
   client_id: process.env.CLIENT_ID,
@@ -41,10 +44,7 @@ const oidc = new ExpressOIDC({
   redirect_uri: "https://" + process.env.PROJECT_DOMAIN + ".glitch.me/authorization-code/callback",
   scope: 'openid profile'
 });
-
-oidc.on('error', err => {
-  console.log("OIDC Error!");
-});
+*/
 
 // session support is required to use ExpressOIDC
 app.use(session({
@@ -113,9 +113,15 @@ var server = http.createServer(app);
  * Listen on provided port, on all network interfaces.
  */
 
-server.listen(port);
-// server.on('error', onError);
-server.on('listening', onListening);
+oidc.on('ready', () => {
+  server.listen(port);
+  //  server.on('error', onError);
+  server.on('listening', onListening);
+});
+
+oidc.on('error', err => {
+  console.log("OIDC ERROR");
+});
 
 /**
  * Normalize a port into a number, string, or false.
