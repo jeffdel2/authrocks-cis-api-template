@@ -67,6 +67,8 @@ app.use(oidc.router);
 app.get("/", function (req, res, next) {
 
   if(envFileEmpty) {
+    // FIXME: Flush this out to give better debugging information
+    //        Perhaps using our own res.render() call here with a template?
     throw new Error(".env file empty!");
   } else {
     next();
@@ -83,7 +85,6 @@ app.use(function(req, res, next) {
 });
 */
 
-/*
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
@@ -94,8 +95,8 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-*/
 
+/****
 // Handle errors
 app.use((err, req, res, next) => {
     if (! err) {
@@ -105,6 +106,7 @@ app.use((err, req, res, next) => {
     res.status(500);
     res.send('500: Internal server error');
 });
+/* */
 
 module.exports = app;
 
