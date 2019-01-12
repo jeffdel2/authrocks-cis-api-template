@@ -1,3 +1,13 @@
+var envFileEmpty = false;
+if(!process.env.CLIENT_ID) {
+  console.log(".env is empty");
+  envFileEmpty = true;
+  process.env.CLIENT_ID = "empty";
+  process.env.CLIENT_SECRET = "empty";
+  process.env.ISSUER = "https://example.okta.com";
+  process.env.OKTA_URL = "https://example.okta.com";
+}
+
 var express = require('express');
 var router = express.Router();
 const session = require('express-session');

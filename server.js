@@ -3,6 +3,15 @@
 /**
  * Module dependencies.
  */
+var envFileEmpty = false;
+if(!process.env.CLIENT_ID) {
+  console.log(".env is empty");
+  envFileEmpty = true;
+  process.env.CLIENT_ID = "empty";
+  process.env.CLIENT_SECRET = "empty";
+  process.env.ISSUER = "https://example.okta.com";
+  process.env.OKTA_URL = "https://example.okta.com";
+}
 
 var debug = require('debug')('bankinguiapp:server');
 var http = require('http');
@@ -13,8 +22,8 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-////var indexRouter = require('./routes/index');
-////var usersRouter = require('./routes/users');
+var indexRouter = require('./routes/index');
+var usersRouter = require('./routes/users');
 
 var app = express();
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
@@ -55,9 +64,16 @@ app.use(session({
 // ExpressOIDC will attach handlers for the /login and /authorization-code/callback routes
 app.use(oidc.router);
 
+app.get("/", function (req, res, next) {
 
-//// app.use('/', indexRouter);
-//// app.use('/users', usersRouter);
+  if(envFileEmpty) {
+    throw new Error(".env file empty!");
+  } else {
+    next();
+  }
+});
+app.use('/', indexRouter);
+app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
 /***
@@ -113,8 +129,7 @@ var server = http.createServer(app);
 
 oidc.on('ready', () => {
   console.log("OIDC Ready");
-  console.log(oidc);
-  
+
   server.listen(port);
   //  server.on('error', onError);
   server.on('listening', onListening);
