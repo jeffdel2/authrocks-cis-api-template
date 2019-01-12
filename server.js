@@ -13,8 +13,8 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+////var indexRouter = require('./routes/index');
+////var usersRouter = require('./routes/users');
 
 var app = express();
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
@@ -34,9 +34,6 @@ const session = require('express-session');
 const { ExpressOIDC } = require('@okta/oidc-middleware');
 const assetsUrl = "https://cdn.glitch.com/" + process.env.PROJECT_ID + "%2F"
 
-var oidc; 
-
-/***
 const oidc = new ExpressOIDC({
   issuer: process.env.ISSUER,
   client_id: process.env.CLIENT_ID,
@@ -44,7 +41,6 @@ const oidc = new ExpressOIDC({
   redirect_uri: "https://" + process.env.PROJECT_DOMAIN + ".glitch.me/authorization-code/callback",
   scope: 'openid profile'
 });
-*/
 
 // session support is required to use ExpressOIDC
 app.use(session({
@@ -60,14 +56,16 @@ app.use(session({
 app.use(oidc.router);
 
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+//// app.use('/', indexRouter);
+//// app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
+/***
 app.use(function(req, res, next) {
   console.log("404 caught");
   next(createError(404));
 });
+*/
 
 /*
 // error handler
