@@ -34,8 +34,6 @@ const session = require('express-session');
 const { ExpressOIDC } = require('@okta/oidc-middleware');
 const assetsUrl = "https://cdn.glitch.com/" + process.env.PROJECT_ID + "%2F"
 
-var oidc;
-/*
 const oidc = new ExpressOIDC({
   issuer: process.env.ISSUER,
   client_id: process.env.CLIENT_ID,
@@ -43,7 +41,10 @@ const oidc = new ExpressOIDC({
   redirect_uri: "https://" + process.env.PROJECT_DOMAIN + ".glitch.me/authorization-code/callback",
   scope: 'openid profile'
 });
-*/
+
+oidc.on('error', err => {
+  console.log("OIDC Error!");
+});
 
 // session support is required to use ExpressOIDC
 app.use(session({
@@ -64,9 +65,11 @@ app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
+  console.log("404 caught");
   next(createError(404));
 });
 
+/*
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
@@ -76,6 +79,17 @@ app.use(function(err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
   res.render('error');
+});
+*/
+
+// Handle errors
+app.use((err, req, res, next) => {
+    if (! err) {
+        return next();
+    }
+
+    res.status(500);
+    res.send('500: Internal server error');
 });
 
 module.exports = app;
@@ -157,14 +171,6 @@ function onError(error) {
  */
 
 function onListening() {
-  oidc = new ExpressOIDC({
-    issuer: process.env.ISSUER,
-    client_id: process.env.CLIENT_ID,
-    client_secret: process.env.CLIENT_SECRET,
-    redirect_uri: "https://" + process.env.PROJECT_DOMAIN + ".glitch.me/authorization-code/callback",
-    scope: 'openid profile'
-  });
-
   
   var addr = server.address();
   var bind = typeof addr === 'string'
