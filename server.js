@@ -112,6 +112,9 @@ var server = http.createServer(app);
  */
 
 oidc.on('ready', () => {
+  console.log("OIDC Ready");
+  console.log(oidc);
+  
   server.listen(port);
   //  server.on('error', onError);
   server.on('listening', onListening);
