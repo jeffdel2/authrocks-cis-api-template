@@ -64,12 +64,12 @@ app.use(session({
 // ExpressOIDC will attach handlers for the /login and /authorization-code/callback routes
 app.use(oidc.router);
 
-app.get("/", function (req, res, next) {
+app.get("/*", function (req, res, next) {
 
   if(envFileEmpty) {
     // FIXME: Flush this out to give better debugging information
     //        Perhaps using our own res.render() call here with a template?
-    throw new Error(".env file empty!");
+    res.render('noEnv', { title: 'Express', assetsUrl: assetsUrl });
   } else {
     next();
   }
