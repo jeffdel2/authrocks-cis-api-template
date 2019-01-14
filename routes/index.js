@@ -198,38 +198,38 @@ router.post('/factorsTest', oidc.ensureAuthenticated(), (req, res, next) => {
 });
 
 router.get('/index', function(req, res, next) {
-  res.render('index', { title: 'Express', assetsUrl: assetsUrl });
+  res.render('index', { title: 'Express', assetsUrl: assetsUrl, user: req.userContext });
 });
 
 router.get('/about', function(req, res, next) {
-  res.render('about', { title: 'Express', assetsUrl: assetsUrl });
+  res.render('about', { title: 'Express', assetsUrl: assetsUrl, user: req.userContext });
 });
 
 router.get('/contact', function(req, res, next) {
-  res.render('contact', { title: 'Express', assetsUrl: assetsUrl });
+  res.render('contact', { title: 'Express', assetsUrl: assetsUrl, user: req.userContext });
 });
 
 
 router.get('/services', function(req, res, next) {
-  res.render('services', { title: 'Express', assetsUrl: assetsUrl });
+  res.render('services', { title: 'Express', assetsUrl: assetsUrl, user: req.userContext });
 });
 
 
 router.get('/widget', function(req, res, next) {
-  res.render('single', { title: 'Express', assetsUrl: assetsUrl });
+  res.render('single', { title: 'Express', assetsUrl: assetsUrl, user: req.userContext });
 });
 
 router.get('/portfolio', function(req, res, next) {
-  res.render('portfolio', { title: 'Express', assetsUrl: assetsUrl });
+  res.render('portfolio', { title: 'Express', assetsUrl: assetsUrl, user: req.userContext });
 });
 
 router.get('/single', function(req, res, next) {
-  res.render('single', { title: 'Express', assetsUrl: assetsUrl });
+  res.render('single', { title: 'Express', assetsUrl: assetsUrl, user: req.userContext });
 });
 
 
 router.get('/blog', function(req, res, next) {
-  res.render('blog', { title: 'Express', assetsUrl: assetsUrl });
+  res.render('blog', { title: 'Express', assetsUrl: assetsUrl, user: req.userContext });
 });
 
 

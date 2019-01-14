@@ -74,6 +74,9 @@ app.get("/*", function (req, res, next) {
     next();
   }
 });
+app.get("/noEnv", function (req, res, next) {
+    res.render('noEnv', { title: 'Express', assetsUrl: assetsUrl, user: res.userContext });
+});
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
