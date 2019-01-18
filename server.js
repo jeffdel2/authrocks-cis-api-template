@@ -11,6 +11,8 @@ if(!process.env.CLIENT_ID) {
   process.env.CLIENT_SECRET = "empty";
   process.env.ISSUER = "https://example.okta.com";
   process.env.OKTA_URL = "https://example.okta.com";
+  // FIXME: We shoudln't require this at all
+  process.env.OKTA_API_TOKEN = "example";
 }
 
 var debug = require('debug')('bankinguiapp:server');
@@ -41,7 +43,10 @@ var oktaConfig = require('config.json')('./oktaconfig.json');
 
 const session = require('express-session');
 const { ExpressOIDC } = require('@okta/oidc-middleware');
+// https://cdn.glitch.com/3b9b03a9-82e6-44b5-8b93-5e0e237c8d29%2F
 const assetsUrl = "https://cdn.glitch.com/" + process.env.PROJECT_ID + "%2F"
+// https://glitch.com/edit/#!/avbank?path=.env:1:0
+const envEditLink = "https://glitch.com/edit/#!/" + process.env.PROJECT_DOMAIN + "?path=.env:1:0";
 
 const oidc = new ExpressOIDC({
   issuer: process.env.ISSUER,
@@ -65,20 +70,16 @@ app.use(session({
 app.use(oidc.router);
 
 app.get("/*", function (req, res, next) {
-
   if(envFileEmpty) {
-    // FIXME: Flush this out to give better debugging information
-    //        Perhaps using our own res.render() call here with a template?
-    res.render('noEnv', { title: 'Express', assetsUrl: assetsUrl });
+    res.render('noEnv', { assetsUrl: assetsUrl, envEditLink: envEditLink });
   } else {
     next();
   }
 });
 app.get("/noEnv", function (req, res, next) {
-    // https://glitch.com/edit/#!/avbank?path=.env:1:0
-    var envEditLink = "https://glitch.com/edit/#!/" + process.env.PROJECT_DOMAIN + "?path=.env:1:0";
-    res.render('noEnv', { title: 'Express', assetsUrl: assetsUrl, envEditLink: envEditLink });
+    res.render('noEnv', { assetsUrl: assetsUrl, envEditLink: envEditLink });
 });
+
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
