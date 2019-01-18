@@ -56,6 +56,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     issuer: '<%= oidcConfig.issuer %>',
     clientId: '<%= oidcConfig.client_id %>',
     redirectUri: '<%= oidcConfig.redirect_uri%>',
+    tokenManager: {
+      storage: 'sessionStorage'
+    },
 };
   </script>
 </head>
