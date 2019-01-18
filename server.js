@@ -43,10 +43,11 @@ var oktaConfig = require('config.json')('./oktaconfig.json');
 
 const session = require('express-session');
 const { ExpressOIDC } = require('@okta/oidc-middleware');
+
 // https://cdn.glitch.com/3b9b03a9-82e6-44b5-8b93-5e0e237c8d29%2F
-const assetsUrl = "https://cdn.glitch.com/" + process.env.PROJECT_ID + "%2F"
+app.locals.assetsUrl = "https://cdn.glitch.com/" + process.env.PROJECT_ID + "%2F";
 // https://glitch.com/edit/#!/avbank?path=.env:1:0
-const envEditLink = "https://glitch.com/edit/#!/" + process.env.PROJECT_DOMAIN + "?path=.env:1:0";
+app.locals.envEditLink = "https://glitch.com/edit/#!/" + process.env.PROJECT_DOMAIN + "?path=.env:1:0";
 
 const oidc = new ExpressOIDC({
   issuer: process.env.ISSUER,
@@ -65,33 +66,22 @@ app.use(session({
   saveUninitialized: false
 }));
 
-
-
-
 // ExpressOIDC will attach handlers for the /login and /authorization-code/callback routes
 app.use(oidc.router);
 
 app.get("/*", function (req, res, next) {
   if(envFileEmpty) {
-    res.render('noEnv', { assetsUrl: assetsUrl, envEditLink: envEditLink });
+    res.render('noEnv');
   } else {
     next();
   }
 });
 app.get("/noEnv", function (req, res, next) {
-    res.render('noEnv', { assetsUrl: assetsUrl, envEditLink: envEditLink });
+    res.render('noEnv');
 });
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-
-// catch 404 and forward to error handler
-/***
-app.use(function(req, res, next) {
-  console.log("404 caught");
-  next(createError(404));
-});
-*/
 
 // error handler
 app.use(function(err, req, res, next) {
@@ -103,18 +93,6 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
-/****
-// Handle errors
-app.use((err, req, res, next) => {
-    if (! err) {
-        return next();
-    }
-
-    res.status(500);
-    res.send('500: Internal server error');
-});
-/* */
 
 module.exports = app;
 

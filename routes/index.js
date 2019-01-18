@@ -54,8 +54,7 @@ var sendToAccounts = function(amount, id, responseFromMFA){
  var options = { method: 'PUT',
   url: putUrl,
   headers: 
-   { 'Postman-Token': '0cf3d312-5f64-1eeb-fd94-7f4cd46a60ab',
-     'Cache-Control': 'no-cache',
+   { 'Cache-Control': 'no-cache',
      Authorization: 'SSWS {{apikey}}',
      'Content-Type': 'application/x-www-form-urlencoded',
      Accept: 'application/json' },
@@ -73,7 +72,7 @@ var sendToAccounts = function(amount, id, responseFromMFA){
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express', assetsUrl: assetsUrl, user: req.userContext });
+  res.render('index', { user: req.userContext });
 });
 
 router.get('/accountPage', oidc.ensureAuthenticated(), (req, res, next) => {
@@ -81,7 +80,7 @@ router.get('/accountPage', oidc.ensureAuthenticated(), (req, res, next) => {
   oktaJwtVerifier.verifyAccessToken(req.userContext.tokens.access_token)
   .catch(jwt => {
     console.log(jwt.parsedBody.factorId)
-    res.render('accountPage', { user: req.userContext, test: "test",assetsUrl: assetsUrl });
+    res.render('accountPage', { user: req.userContext });
   });
 
 });
@@ -114,6 +113,7 @@ router.get('/factors', function(req, res, next) {
   console.log(req.userContext.userinfo)
   var options = { method: 'GET',
   url: oktaTenantUrl  + '/api/v1/users/' + req.userContext.userinfo.sub +'/factors',
+  // FIXME: DRY this up
   headers:
   { 
   'Cache-Control': 'no-cache',
@@ -198,38 +198,38 @@ router.post('/factorsTest', oidc.ensureAuthenticated(), (req, res, next) => {
 });
 
 router.get('/index', function(req, res, next) {
-  res.render('index', { title: 'Express', assetsUrl: assetsUrl, user: req.userContext });
+  res.render('index', { user: req.userContext });
 });
 
 router.get('/about', function(req, res, next) {
-  res.render('about', { title: 'Express', assetsUrl: assetsUrl, user: req.userContext });
+  res.render('about', { user: req.userContext });
 });
 
 router.get('/contact', function(req, res, next) {
-  res.render('contact', { title: 'Express', assetsUrl: assetsUrl, user: req.userContext });
+  res.render('contact', { user: req.userContext });
 });
 
 
 router.get('/services', function(req, res, next) {
-  res.render('services', { title: 'Express', assetsUrl: assetsUrl, user: req.userContext });
+  res.render('services', { user: req.userContext });
 });
 
 
 router.get('/widget', function(req, res, next) {
-  res.render('single', { title: 'Express', assetsUrl: assetsUrl, user: req.userContext });
+  res.render('single', { user: req.userContext });
 });
 
 router.get('/portfolio', function(req, res, next) {
-  res.render('portfolio', { title: 'Express', assetsUrl: assetsUrl, user: req.userContext });
+  res.render('portfolio', { user: req.userContext });
 });
 
 router.get('/single', function(req, res, next) {
-  res.render('single', { title: 'Express', assetsUrl: assetsUrl, user: req.userContext });
+  res.render('single', { user: req.userContext });
 });
 
 
 router.get('/blog', function(req, res, next) {
-  res.render('blog', { title: 'Express', assetsUrl: assetsUrl, user: req.userContext });
+  res.render('blog', { user: req.userContext });
 });
 
 
