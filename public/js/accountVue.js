@@ -57,7 +57,8 @@ Vue.component('account-item', {
   props: {
     account: Object
   },
-  template: "<div class='col-lg-4 col-sm-6'><div class='card'><div class='card-block block-1'><h3 class='card-title'>{{account.title}}<span>| {{account.balance}}</span></h3><button type='button' class='btn btn-danger ml-lg-5 w3ls-btn' onclick='showActions(this)' data-toggle='modal' aria-pressed='false' data-target='#testModal'>Do Actions <span style='display: none;'>{{account._id}}</span></button></div></div></div><br><br>"
+  // FIXME: Move this HTML into the template and use a Vue loop to iterate over it.
+  template: "<div class='col-lg-4 col-sm-6'><div class='card'><div class='card-block block-1'><h3 class='card-title'>{{account.title}}: <span class='money'>{{account.balance}}</span></h3><button type='button' class='btn btn-danger ml-lg-5 w3ls-btn' onclick='showActions(this)' data-toggle='modal' aria-pressed='false' data-target='#testModal'>Do Actions <span style='display: none;'>{{account._id}}</span></button></div></div></div><br><br>"
 })
 
 new Vue({
