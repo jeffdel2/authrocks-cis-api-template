@@ -59,12 +59,15 @@ var config = {
 */
 
 const oidcConfig = {
+  url: process.env.ISSUER.split('/').slice(0,3).join('/') + '/',
   issuer: process.env.ISSUER,
   client_id: process.env.CLIENT_ID,
   client_secret: process.env.CLIENT_SECRET,
   redirect_uri: "https://" + process.env.PROJECT_DOMAIN + ".glitch.me/authorization-code/callback",
   scope: 'openid profile'
 };
+
+app.locals.oidcConfig = oidcConfig;
 
 const oidc = new ExpressOIDC(oidcConfig);
 
