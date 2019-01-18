@@ -25,5 +25,7 @@ authClient.session.get().then(function(session) {
     var base64 = base64Url.replace('-', '+').replace('_', '/');
     var info = JSON.parse(window.atob(base64));
     console.log(info)
+  }).else(function() {
+    console.log("OktaAuth.js: Didn't get tokens");
   })
 })

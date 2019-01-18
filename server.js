@@ -49,13 +49,24 @@ app.locals.assetsUrl = "https://cdn.glitch.com/" + process.env.PROJECT_ID + "%2F
 // https://glitch.com/edit/#!/avbank?path=.env:1:0
 app.locals.envEditLink = "https://glitch.com/edit/#!/" + process.env.PROJECT_DOMAIN + "?path=.env:1:0";
 
-const oidc = new ExpressOIDC({
+/*
+var config = {
+  url: 'https://login.vanbeeklabs.com',
+  issuer: 'https://login.vanbeeklabs.com/oauth2/default',
+  clientId: '0oahikuahrKHsYSTZ0h7',
+  redirectUri: 'https://avbank.glitch.me/authorization-code/callback',
+};
+*/
+
+const oidcConfig = {
   issuer: process.env.ISSUER,
   client_id: process.env.CLIENT_ID,
   client_secret: process.env.CLIENT_SECRET,
   redirect_uri: "https://" + process.env.PROJECT_DOMAIN + ".glitch.me/authorization-code/callback",
   scope: 'openid profile'
-});
+};
+
+const oidc = new ExpressOIDC(oidcConfig);
 
 // Session support is required to use ExpressOIDC
 app.use(session({
