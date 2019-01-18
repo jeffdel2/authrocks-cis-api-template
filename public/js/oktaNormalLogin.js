@@ -2,9 +2,10 @@
 
 // window.alert("test")
 
+// config is dynmaically defined and loaded into the JS namespace in views/header.ejs
 var config = {
   url: 'https://login.vanbeeklabs.com',
-  tokenManager: {
+config.  tokenManager: {
     storage: 'sessionStorage'
   },
     issuer: 'https://login.vanbeeklabs.com/oauth2/default',
