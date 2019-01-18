@@ -58,6 +58,7 @@ const oidc = new ExpressOIDC({
 
 // session support is required to use ExpressOIDC
 app.use(session({
+  // fixme: use client secret here
   secret: 'this should be secure',
   resave: true,
   saveUninitialized: false
