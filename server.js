@@ -56,10 +56,11 @@ const oidc = new ExpressOIDC({
   scope: 'openid profile'
 });
 
-// session support is required to use ExpressOIDC
+// Session support is required to use ExpressOIDC
 app.use(session({
-  // fixme: use client secret here
-  secret: 'this should be secure',
+  // Note: In a perfect world, this should be a seperate secret from the CLIENT_SECRET
+  //       However, re-using the CLIENT_SECRET is a reasonable and pragmatic compromise
+  secret: process.env.CLIENT_SECRET,
   resave: true,
   saveUninitialized: false
 }));
