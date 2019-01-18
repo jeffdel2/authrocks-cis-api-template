@@ -7,7 +7,8 @@ var showActions = function(account) {
   $('#myForm').submit(function(e){
     e.preventDefault();
     $.ajax({
-      url:'http://localhost:3000/factorsTest',
+      // [jpf] FIXME: I'm not sure if a relative link will work here
+      url:'/factorsTest',
       type:'post',
       success:function(){
         var formData = $('#modalForm').serialize()
@@ -21,7 +22,8 @@ var showActions = function(account) {
         $('#modalForm').submit(function(e){
           e.preventDefault();
           $.ajax({
-            url:'http://localhost:3000/factorsTest',
+            // [jpf] FIXME: I'm not sure if a relative link will work here
+            url:'/factorsTest',
             type:'post',
             data:$('#modalForm, #myForm').serialize(),
             success:function(){

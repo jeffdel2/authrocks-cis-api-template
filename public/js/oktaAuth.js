@@ -1,16 +1,5 @@
-// FIXME: Create a route to generate this dynamically, or perhaps geneate via .ejs
-
-/*
-var config = {
-  url: 'https://login.vanbeeklabs.com',
-  issuer: 'https://login.vanbeeklabs.com/oauth2/default',
-  clientId: '0oahikuahrKHsYSTZ0h7',
-  redirectUri: 'https://avbank.glitch.me/authorization-code/callback',
-};
-*/
-
 console.log("OktaAuth.js");
-var authClient = new OktaAuth(config);
+var authClient = new OktaAuth(config); // config is defined in views/header.ejs
 
 authClient.session.get().then(function(session) {
   console.log("OktaAuth.js: got session:");
