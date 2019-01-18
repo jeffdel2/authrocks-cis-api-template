@@ -75,7 +75,9 @@ app.get("/*", function (req, res, next) {
   }
 });
 app.get("/noEnv", function (req, res, next) {
-    res.render('noEnv', { title: 'Express', assetsUrl: assetsUrl, user: res.userContext });
+    // https://glitch.com/edit/#!/avbank?path=.env:1:0
+    var envEditLink = "https://glitch.com/edit/#!/" + process.env.PROJECT_DOMAIN + "?path=.env:1:0";
+    res.render('noEnv', { title: 'Express', assetsUrl: assetsUrl, user: res.userContext, envEditLink: envEditLink });
 });
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
