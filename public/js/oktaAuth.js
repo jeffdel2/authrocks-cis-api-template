@@ -8,12 +8,20 @@ authClient.session.get().then(function(session) {
   authClient.token.getWithoutPrompt({
     responseType: ["id_token", "token"],
     scopes: ["openid", "email"] // or array of types// optional if the user has an existing Okta session
-  }).then(function(tokenOrTokens) {
-    console.log("Here are the tokens we fetched:");
-    console.log(tokenOrTokens)
-    authClient.tokenManager.add('accessToken', tokenOrTokens);
-    console.log(tokenOrTokens.sub)
-    var base64Url = tokenOrTokens.accessToken.split('.')[1];
+  }).then(function(tokens) {
+    console.log("Got tokens:");
+    console.log(tokens);
+    for (var token in tokens) {
+      for (var kind in ['idToken', 'accessToken']) {
+        if (kind in token) {
+          console.log("Received an " + kind + " from Okta");
+          console.log(token);
+          authClient.tokenManager.add(kind, token);
+        }
+      }
+    }
+    var accessToken = authClient.tokenManager.get('accessToken');
+    var base64Url = accessToken.accessToken.split('.')[1];
     var base64 = base64Url.replace('-', '+').replace('_', '/');
     var info = JSON.parse(window.atob(base64));
     console.log(info)
