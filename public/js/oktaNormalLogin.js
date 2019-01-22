@@ -38,9 +38,9 @@ var do_login = function() {
     if (transaction.status === 'SUCCESS') {
       // Step #1: get sessionToken
       console.log('sessionToken = ', transaction.sessionToken);
-
+      console.log(window.location.origin + "/accountPage")
       // [jpf] FIXME: I'm not sure if the relative link will work 
-      authClient.session.setCookieAndRedirect(transaction.sessionToken, window.location.origin + "/accountPage");
+      // authClient.session.setCookieAndRedirect(transaction.sessionToken, window.location.origin + "/accountPage");
 
     } else {
       throw 'We cannot handle the ' + transaction.status + ' status';
