@@ -18,11 +18,12 @@
 - ☐ DRY up routes/index.js
 - ☐ Reduce the variables needed `.env` 
 - ☐ Get "Services" login page working again (it's a template thing)
-
-# New features
 - ☑ Nice token viewer upon login
 - ☐ Wrap JWT verifier around the API
+- ☐ Nice to have: "Click to copy" buttons for id_token and access_token JWTs
 - ☐ Build UI for opening an account? (not on the critical path)
 - ☑ Add friendly error page when the values in `.env` file are incomplete
     (If the file is empty, the page never loads)
 - ☐ Add Progressive Profiling functionality
+- ☐ Fix "Second Login" button (put it behind a different page like Andrew had)
+- ☐ Add "Logout" button
