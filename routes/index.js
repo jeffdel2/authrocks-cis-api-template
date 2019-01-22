@@ -210,7 +210,7 @@ router.get('/contact', function(req, res, next) {
 
 
 router.get('/services', function(req, res, next) {
-  res.render('services', { user: req.userContext, url:  process.env.ISSUER});
+  res.render('services', { user: req.userContext, customLogin: true, url: process.env.ISSUER});
 });
 
 
