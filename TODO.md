@@ -27,3 +27,5 @@
 - ☐ Add Progressive Profiling functionality
 - ☐ Fix "Second Login" button (put it behind a different page like Andrew had)
 - ☐ Add "Logout" button
+- ☐ Add "Edit" link to Glitch console
+- ☐ Fix "Edit me" link for "not configured" page

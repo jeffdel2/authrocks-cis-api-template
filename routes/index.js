@@ -55,7 +55,6 @@ var sendToAccounts = function(amount, id, responseFromMFA){
   url: putUrl,
   headers: 
    { 'Cache-Control': 'no-cache',
-     Authorization: 'SSWS {{apikey}}',
      'Content-Type': 'application/x-www-form-urlencoded',
      Accept: 'application/json' },
   form: { requestedAmount: amount } };
