@@ -40,7 +40,7 @@ var do_login = function() {
       console.log('sessionToken = ', transaction.sessionToken);
 
       // [jpf] FIXME: I'm not sure if the relative link will work 
-      authClient.session.setCookieAndRedirect(transaction.sessionToken, "/accountPage");
+      authClient.session.setCookieAndRedirect(transaction.sessionToken, window.location.origin + "/accountPage");
 
     } else {
       throw 'We cannot handle the ' + transaction.status + ' status';
