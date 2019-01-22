@@ -47,3 +47,45 @@ var openAccount = function() {
 
      });
  });
+
+// Start Token Viewer Code
+function jsonPP(input) {
+  var obj = JSON.parse(input);
+  return JSON.stringify(obj, undefined, 4);
+}
+
+function jwtPP(token, part = 0) {
+  var token_parts = token.split('.');
+  var rawJson = window.atob(token_parts[part]);
+  return jsonPP(rawJson);
+}
+
+// FIXME: init authClient then:
+// authClient.token.getUserInfo(v).then(function(x) { userProfile.profile = jsonPP(x); userProfile.username = x.username; })
+
+var tokenModal = new Vue({
+  delimiters: ['[[', ']]'],
+  el: '#tokenModal',
+  data: {
+    cards: [
+      // {
+      //   "name": "id_token",
+      //   "jwt": id_token,
+      // },
+      // {
+      //   "name": "access_token",
+      //   "jwt": access_token
+      // },
+    ]
+  },
+  methods: {
+    header: function(input) {
+      return jwtPP(input, 0);
+    },
+    payload: function(input) {
+      return jwtPP(input, 1);
+    }
+  }
+});
+
+// End Token Viewer Code
