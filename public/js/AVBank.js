@@ -88,4 +88,18 @@ var tokenModal = new Vue({
   }
 });
 
+var access_token = authClient.tokenManager.get("accessToken").accessToken;
+var id_token     = authClient.tokenManager.get("idToken").idToken;
+
+  
+  tokenModal.cards = [
+    {
+      "name": "id_token",
+      "jwt": id_token,
+    },
+    {
+      "name": "access_token",
+      "jwt": access_token
+    },
+  ]
 // End Token Viewer Code

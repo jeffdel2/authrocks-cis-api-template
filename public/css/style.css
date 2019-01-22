@@ -5,6 +5,15 @@ License: Creative Commons Attribution 3.0 Unported
 License URL: http://creativecommons.org/licenses/by/3.0/
 */
 
+// [jpf] Makes the token viewer modal dialog bigger
+.modal-dialog {
+  max-width: 1000px;
+}
+
+.av-button {
+  margin-left: 10px;
+}
+
 html,
 body {
     font-family: 'Raleway', sans-serif;
