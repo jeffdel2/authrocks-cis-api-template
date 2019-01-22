@@ -1,4 +1,5 @@
 // "config" is dynamically defined and loaded into the JS namespace in views/header.ejs
+ console.log(config)
 config.tokenManager = {
     storage: 'sessionStorage'
 };
