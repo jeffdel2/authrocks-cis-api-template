@@ -1,4 +1,4 @@
-# TODO
+# Done
 
 - Move as many files from `/public/` to CDN equivalents as possible
   - ☑ css/fontawesome icons
@@ -18,16 +18,21 @@
     (If the file is empty, the page never loads)
 - ☑ Fix "Second Login" button (put it behind a different page like Andrew had)
   (It's behind "Services" now)
+- ☑ Get "Services" login page working again (it's a template thing)
 - ☑ Add "Logout" button
 - ☑ Add "Edit" link to Glitch console
-- ☐ Fix token viewer in every situation
+- ☑ Fix "Edit me" link for "not configured" page
+
+# TODO
+- ☐ Get Token Viewer to work under all login situations
+- ☐ Add Progressive Profiling functionality
+- ☐ Reduce the variables needed `.env` 
+- ☐ Move Express code to as few files as possible (or maybe only to what's logical)
+
+# Lower priority
 - ☐ Fix /maintenance
 - ☐ DRY up routes/index.js
-- ☐ Reduce the variables needed `.env` 
-- ☐ Get "Services" login page working again (it's a template thing)
-- ☐ Wrap JWT verifier around the API
 - ☐ Nice to have: "Click to copy" buttons for id_token and access_token JWTs
 - ☐ Build UI for opening an account? (not on the critical path)
-- ☐ Move Express code to as few files as possible (or maybe only to what's logical)
-- ☐ Add Progressive Profiling functionality
-- ☐ Fix "Edit me" link for "not configured" page
+- ☐ Wrap JWT verifier around the API
+- ☐ Add Hooks story to demo
