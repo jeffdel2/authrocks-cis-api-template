@@ -47,18 +47,12 @@ const { ExpressOIDC } = require('@okta/oidc-middleware');
 // https://cdn.glitch.com/3b9b03a9-82e6-44b5-8b93-5e0e237c8d29%2F
 app.locals.assetsUrl = "https://cdn.glitch.com/" + process.env.PROJECT_ID + "%2F";
 // https://glitch.com/edit/#!/avbank?path=.env:1:0
-app.locals.envEditLink = "https://glitch.com/edit/#!/" + process.env.PROJECT_DOMAIN + "?path=.env:1:0";
-
-/*
-var config = {
-  url: 'https://login.vanbeeklabs.com',
-  issuer: 'https://login.vanbeeklabs.com/oauth2/default',
-  clientId: '0oahikuahrKHsYSTZ0h7',
-  redirectUri: 'https://avbank.glitch.me/authorization-code/callback',
-};
-*/
+app.locals.editLink = "https://glitch.com/edit/#!/" + process.env.PROJECT_DOMAIN;
+// https://glitch.com/edit/#!/avbank
+app.locals.envEditLink = app.locals.editLink + "?path=.env:1:0";
 
 const oidcConfig = {
+  // FIXME: Give example of the "url" below:
   url: process.env.ISSUER.split('/').slice(0,3).join('/') + '/',
   issuer: process.env.ISSUER,
   client_id: process.env.CLIENT_ID,
