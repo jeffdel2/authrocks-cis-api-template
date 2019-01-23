@@ -8,11 +8,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <html lang="zxx">
 
 <head>
-	<title>AVBank Corporate Category Flat Bootstrap Responsive Website Template | Home :: w3layouts</title>
+	<title>AVBank</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="utf-8">
-	<meta name="keywords" content="AVBank Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
-	SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+	<meta name="keywords" content="AVBank sample application for Okta" />
 	<script>
 		addEventListener("load", function () {
 			setTimeout(hideURLbar, 0);
@@ -24,10 +23,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	</script>
 	<!-- Bootstrap Core CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  <!-- Magnific Popup -->
-  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/0.9.9/magnific-popup.css" integrity="sha256-vykRtEx/oLFzSrbwO4y0YkXO9988343rDJoa2MYpS3s=" crossorigin="anonymous" /> -->
-	<!-- popup box -->
-	<!-- <link href="css/popuo-box.css" rel="stylesheet" type="text/css" media="all" /> -->
 	<!-- Custom CSS -->
 	<link href="css/style.css" rel='stylesheet' type='text/css' />
 	<!-- font-awesome icons -->
@@ -39,17 +34,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	    rel="stylesheet">
   <script src="https://ok1static.oktacdn.com/assets/js/sdk/okta-auth-js/1.17.0/okta-auth-js.min.js"type="text/javascript"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
-  <link
-  href="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/2.13.0/css/okta-sign-in.min.css"
-  type="text/css"
-  rel="stylesheet"/>
-
-  <script
-  src="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/2.13.0/js/okta-sign-in.min.js"
-  type="text/javascript"></script>
-
+  <link href="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/2.13.0/css/okta-sign-in.min.css" type="text/css" rel="stylesheet"/>
+  <script src="https://ok1static.oktacdn.com/assets/js/sdk/okta-signin-widget/2.13.0/js/okta-sign-in.min.js" type="text/javascript"></script>
 	<!-- //webfonts -->
   <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+  <!-- Make Okta configuration available in a global variable-->
   <script>
   var config = {
     url: '<%= oidcConfig.url %>',
@@ -71,9 +60,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			<nav class="navbar navbar-expand-lg navbar-light py-4">
 				<!-- logo -->
 				<h1>
-					<a class="navbar-brand" href="index">
-						AVBank
-					</a>
+					<a class="navbar-brand" href="index">AVBank</a>
 				</h1>
 				<!-- //logo -->
 				<button class="navbar-toggler ml-md-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -118,6 +105,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 							<a class="nav-link" href="contact">contact</a>
 						</li>
 						<li>
+              <!-- FIXME: Move this elsewhere -->
 							<script>
 							var toLogin = function() {
 								window.location = "/accountPage"
