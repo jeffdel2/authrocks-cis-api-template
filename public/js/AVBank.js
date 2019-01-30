@@ -88,6 +88,12 @@ var tokenModal = new Vue({
   }
 });
 
+var branchPrompt = new Vue({
+  el: '#branchPrompt',
+  data: {
+  }
+});
+
 var access_token = authClient.tokenManager.get("accessToken").accessToken;
 var id_token     = authClient.tokenManager.get("idToken").idToken;
 
