@@ -30,15 +30,6 @@ var tokenModal = new Vue({
   }
 });
 
-var branchPrompt = new Vue({
-  el: '#branchPrompt',
-  data: {
-    message: "",
-    branches: [],
-    seen: false,
-  }
-});
-
 $(document).ready(function () {
   window.onload = function () {
     document.getElementById("password1").onchange = validatePassword;
@@ -55,9 +46,14 @@ $(document).ready(function () {
       //empty string means no validation error
   }
   
-  branchPrompt.message = "Hello world";
-  branchPrompt.branches = ["aye", "bee", "sea"];
-  branchPrompt.seen = true;
+  var branchPrompt = new Vue({
+    el: '#branchPrompt',
+    data: {
+      message: "HEllo world",
+      branches: ["aye", "bee", "see"],
+      seen: false,
+    }
+  });
 });
 
 // Start Token Viewer Code
