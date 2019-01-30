@@ -13,7 +13,6 @@ var validationOptions = {
   issuer: config.url + 'oauth2/default'
 }
 
-
 var authClient = new OktaAuth(config);
 
 $( "#loginForm" ).submit(function( event ) {

@@ -13,15 +13,11 @@
 <%- include partials/openAccount.ejs %>
 <div class="services-bot-agile2 py-sm-5 py-3">
   
-  <div class="alert alert-warning alert-dismissible fade show" role="alert" id="branchPrompt">
-    What is your preferred branch?    
+  <div class="alert alert-warning alert-dismissible fade show" role="alert" id="branchPrompt" v-if="seen">
+    {{ message }}
     <form class="col-sm-2 d-inline-block">
       <select class="form-control">
-        <option>Washington</option>
-        <option>Springfield</option>
-        <option>Franklin</option>
-        <option>Greenville</option>
-        <option>Bristol</option>
+        <option v-for="branch in branches">{{ branch }}</option>
       </select>
     </form>
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -127,7 +123,7 @@
 </div>
 <!-- //andrew description -->
 <!-- //title description -->
-<!-- Services section -->
+<!-- Accounts -->
 <section class="wfour-row py-sm-5 pt-3 slide-bg position-relative transactions" id="we_offer_agile">
   <div class="container py-md-5 py-3">
     <div class="services-bot-agile position-absolute">
@@ -139,6 +135,7 @@
     </div>
   </div>
 </section>
+<!-- Transactions -->
 <section>
   <center><h3>Transactions</h3></center>
   <table class="table table-dark table-striped">
