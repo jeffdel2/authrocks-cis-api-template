@@ -1,4 +1,5 @@
 <%- include('header') -%>
+
 <!-- inner banner -->
 
 <!-- //inner banner -->
@@ -11,6 +12,28 @@
 <%- include partials/smsMfaModal.ejs %>
 <%- include partials/openAccount.ejs %>
 <div class="services-bot-agile2 py-sm-5 py-3">
+  
+  <div class="alert alert-primary" role="alert">
+  What is your preferred branch?
+
+    <form>
+
+    <select class="form-control col-md-2" id="exampleFormControlSelect2">
+      <option>Washington</option>
+      <option>Springfield</option>
+      <option>Franklin</option>
+      <option>Greenville</option>
+      <option>Bristol</option>
+    </select>
+    </form>
+  </div>
+    
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+  
   <button type="button" class="btn btn-danger btn-lg float-right av-button" onclick="openAccount()">Open Account</button>
   <button type="button" class="btn btn-danger btn-lg float-right av-button" data-toggle="modal" data-target="#tokenModal">View Tokens</button>
 
