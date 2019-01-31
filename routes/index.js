@@ -93,6 +93,8 @@ router.get('/', function(req, res, next) {
   res.render('index', { user: req.userContext });
 });
 
+
+
 router.get('/accountPage', oidc.ensureAuthenticated(), (req, res, next) => {
   //console.log("/accountPage");
   //console.log(req.userContext.tokens.access_token);
@@ -102,6 +104,9 @@ router.get('/accountPage', oidc.ensureAuthenticated(), (req, res, next) => {
     console.log("jwt.parsedBody");
     console.log(jwt.parsedBody);
     var userPrompt = false;
+    
+    promptIfNeeded(jwt.parsedBody), 
+    
     oktaApiGet('/api/v1/meta/schemas/user/default', function(error, response, body) {
       var result = JSON.parse(body);
       console.log("Okta Schema");
