@@ -37,8 +37,10 @@ const okta = require('@okta/okta-sdk-nodejs');
 
 const client = new okta.Client({
   orgUrl: process.env.OKTA_URL,
-  token: process.env.OKTA_API_TOKEN,    // Obtained from Developer Dashboard
-  requestExecutor: new okta.DefaultRequestExecutor() // Will be added by default in 2.0
+  // Obtained from Developer Dashboard
+  token: process.env.OKTA_API_TOKEN,
+  // Will be added by default in 2.0
+  requestExecutor: new okta.DefaultRequestExecutor() 
 });
 
 const apiToken = process.env.OKTA_API_TOKEN;
@@ -92,8 +94,8 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/accountPage', oidc.ensureAuthenticated(), (req, res, next) => {
-  console.log("/accountPage");
-  console.log(req.userContext.tokens.access_token);
+  //console.log("/accountPage");
+  //console.log(req.userContext.tokens.access_token);
   
   oktaJwtVerifier.verifyAccessToken(req.userContext.tokens.access_token)
   .catch(jwt => {

@@ -13,6 +13,7 @@
 <%- include partials/openAccount.ejs %>
 <div class="services-bot-agile2 py-sm-5 py-3">
   
+  <!-- Start User Prompt -->
   <div class="alert alert-warning alert-dismissible fade show" role="alert" id="userPrompt">
     <%= userPrompt.description %>
     <form class="col-sm-2 d-inline-block">
@@ -26,7 +27,7 @@
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
-
+  <!-- End User Prompt -->
   
   <button type="button" class="btn btn-danger btn-lg float-right av-button" onclick="openAccount()">Open Account</button>
   <button type="button" class="btn btn-danger btn-lg float-right av-button" data-toggle="modal" data-target="#tokenModal">View Tokens</button>
