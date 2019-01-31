@@ -76,7 +76,8 @@ router.get('/', function(req, res, next) {
 
 router.get('/accountPage', oidc.ensureAuthenticated(), (req, res, next) => {
   console.log("/accountPage");
-  console.log(req.userContext.tokens.access_token)
+  console.log(req.userContext.tokens.access_token);
+  
   oktaJwtVerifier.verifyAccessToken(req.userContext.tokens.access_token)
   .catch(jwt => {
     console.log("jwt.parsedBody");
