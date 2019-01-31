@@ -99,17 +99,23 @@ router.get('/accountPage', oidc.ensureAuthenticated(), (req, res, next) => {
   .catch(jwt => {
     console.log("jwt.parsedBody");
     console.log(jwt.parsedBody);
+    var userPrompt = false;
     oktaApiGet('/api/v1/meta/schemas/user/default', function(error, response, body) {
       var result = JSON.parse(body);
       console.log("Okta Schema");
-      console.log(result.definitions.custom.properties.prefbranch);
       
+      // FIXME: pull this dynamically
+      const schema = result.definitions.custom.properties.prefbranch; 
+      userPrompt = {
+        description: schema.description,
+        options: schema.items.oneOf,
+      }
+      console.log(userPrompt);
+      // console.log(jwt.parsedBody.factorId);
+      res.render('accountPage', { user: req.userContext, userPrompt: userPrompt });
       // FIXME: Extract what I want from the schema and give it to accountPage
     });
 
-
-    console.log(jwt.parsedBody.factorId);
-    res.render('accountPage', { user: req.userContext });
   });
 
 });
