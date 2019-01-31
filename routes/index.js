@@ -67,7 +67,7 @@ var sendToAccounts = function(amount, id, responseFromMFA){
   });
 }
 
-function oktaApiRequest(path, callback) {
+function oktaApiGet(path, callback) {
   var request = require("request");
   var options = { 
     method: 'GET',
@@ -99,6 +99,15 @@ router.get('/accountPage', oidc.ensureAuthenticated(), (req, res, next) => {
   .catch(jwt => {
     console.log("jwt.parsedBody");
     console.log(jwt.parsedBody);
+    oktaApiGet('/api/v1/meta/schemas/user/default', function(error, response, body) {
+      var result = JSON.parse(body);
+      console.log("Okta Schema");
+      console.log(result.definitions.custom.properties.prefbranch);
+      
+      // FIXME: Extract what I want from the schema and give it to accountPage
+    });
+
+
     console.log(jwt.parsedBody.factorId);
     res.render('accountPage', { user: req.userContext });
   });
