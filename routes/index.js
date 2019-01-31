@@ -67,6 +67,23 @@ var sendToAccounts = function(amount, id, responseFromMFA){
   });
 }
 
+function oktaApiRequest(path, callback) {
+  var request = require("request");
+  var options = { 
+    method: 'GET',
+    url: oktaTenantUrl + path,
+    headers: { 
+      'Cache-Control': 'no-cache',
+      'Authorization': 'SSWS ' + apiToken,
+      'Content-Type': 'application/json',
+      'Accept': 'application/json' 
+    } 
+  };
+
+  request(options, function (error, response, body) {
+    callback(error, response, body);
+  });
+};
 
 
 /* GET home page. */
@@ -117,12 +134,12 @@ router.get('/factors', function(req, res, next) {
   var options = { method: 'GET',
   url: oktaTenantUrl  + '/api/v1/users/' + req.userContext.userinfo.sub +'/factors',
   // FIXME: DRY this up
-  headers:
-  { 
-  'Cache-Control': 'no-cache',
-  Authorization: 'SSWS ' + apiToken,
-  'Content-Type': 'application/json',
-  Accept: 'application/json' } };
+  headers: { 
+    'Cache-Control': 'no-cache',
+    Authorization: 'SSWS ' + apiToken,
+    'Content-Type': 'application/json',
+    Accept: 'application/json' } 
+  };
 
   request(options, function (error, response, body) {
     if (error) throw new Error(error);
