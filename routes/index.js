@@ -75,10 +75,13 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/accountPage', oidc.ensureAuthenticated(), (req, res, next) => {
+  console.log("/accountPage");
   console.log(req.userContext.tokens.access_token)
   oktaJwtVerifier.verifyAccessToken(req.userContext.tokens.access_token)
   .catch(jwt => {
-    console.log(jwt.parsedBody.factorId)
+    console.log("jwt.parsedBody");
+    console.log(jwt.parsedBody);
+    console.log(jwt.parsedBody.factorId);
     res.render('accountPage', { user: req.userContext });
   });
 
