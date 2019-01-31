@@ -94,6 +94,31 @@ router.get('/', function(req, res, next) {
 });
 
 
+function promptIfNeeded(token, callback) {
+  const opt = token.opt;
+  var userPrompt = false;
+  console.log("opt contains:");
+  console.log(opt);
+  if (opt.length > 0) {
+      oktaApiGet('/api/v1/meta/schemas/user/default', function(error, response, body) {
+      var result = JSON.parse(body);
+      console.log("Okta Schema");
+      
+      // FIXME: pull this dynamically
+      const schema = result.definitions.custom.properties.prefbranch; 
+      userPrompt = {
+        description: schema.description,
+        options: schema.items.oneOf,
+      }
+      console.log(userPrompt);
+      callback(userPrompt)
+    });
+  } else {
+    callback(userPrompt);
+  }
+
+}
+
 
 router.get('/accountPage', oidc.ensureAuthenticated(), (req, res, next) => {
   //console.log("/accountPage");
@@ -105,26 +130,10 @@ router.get('/accountPage', oidc.ensureAuthenticated(), (req, res, next) => {
     console.log(jwt.parsedBody);
     var userPrompt = false;
     
-    promptIfNeeded(jwt.parsedBody), 
-    
-    oktaApiGet('/api/v1/meta/schemas/user/default', function(error, response, body) {
-      var result = JSON.parse(body);
-      console.log("Okta Schema");
-      
-      // FIXME: pull this dynamically
-      const schema = result.definitions.custom.properties.prefbranch; 
-      userPrompt = {
-        description: schema.description,
-        options: schema.items.oneOf,
-      }
-      console.log(userPrompt);
-      // console.log(jwt.parsedBody.factorId);
+    promptIfNeeded(jwt.parsedBody, function (userPrompt) {
       res.render('accountPage', { user: req.userContext, userPrompt: userPrompt });
-      // FIXME: Extract what I want from the schema and give it to accountPage
     });
-
   });
-
 });
 
 router.post('/resetMfa', oidc.ensureAuthenticated(), (req, res, next) => {
