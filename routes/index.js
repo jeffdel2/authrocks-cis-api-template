@@ -154,10 +154,12 @@ router.get('/updateProfile', oidc.ensureAuthenticated(), (req, res, next) => {
         }
       }
     }
-    console.log(user);
-    user.update().then(() => console.log('User updated?'));
+    // console.log(user);
+    user.update().then(() => { 
+      // console.log('User updated');
+      res.sendStatus(204);
+    });
   });
-  res.send(204);
 });
 
 router.get('/accountPage', oidc.ensureAuthenticated(), (req, res, next) => {

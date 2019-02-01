@@ -83,3 +83,13 @@ var id_token     = authClient.tokenManager.get("idToken").idToken;
     },
   ]
 // End Token Viewer Code
+
+var x;
+
+$("#userPrompt select").change(function() {
+  console.log("New item selected:");
+  $( "#userPrompt select option:selected" ).each(function() {
+      console.log($( this ).context.value);
+    x = $(this);
+  });
+});
