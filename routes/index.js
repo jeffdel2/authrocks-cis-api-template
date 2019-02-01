@@ -96,22 +96,21 @@ router.get('/', function(req, res, next) {
 
 
 function promptIfNeeded(token, callback) {
-  
-  const opt = token.opt;
   var userPrompt = false;
-  console.log("opt contains:");
-  console.log(opt);
-  if (opt.length > 0) {
+  if('opt' in token && token.opt.length > 0) {
       oktaApiGet('/api/v1/meta/schemas/user/default', function(error, response, body) {
       var result = JSON.parse(body);
       console.log("Okta Schema");
       
-      // FIXME: pull this dynamically
-      const schema = result.definitions.custom.properties.prefbranch; 
-      userPrompt = {
-        description: schema.description,
-        options: schema.items.oneOf,
-      }
+      userPrompt = [];
+      token.opt.forEach(function(key) {
+        // FIXME: pull this dynamically
+        const schema = result.definitions.custom.properties[key]; 
+        userPrompt.push({
+          description: schema.description,
+          options: schema.items.oneOf,
+        });
+      });
       console.log(userPrompt);
       callback(userPrompt)
     });
