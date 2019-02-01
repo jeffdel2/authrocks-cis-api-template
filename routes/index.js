@@ -124,6 +124,7 @@ function promptIfNeeded(token, callback) {
       token.opt.forEach(function(key) {
         const schema = result.definitions.custom.properties[key]; 
         userPrompt.push({
+          id: key,
           description: schema.description,
           options: schema.items.oneOf,
         });
