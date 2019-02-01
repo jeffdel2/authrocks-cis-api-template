@@ -122,6 +122,15 @@ function promptIfNeeded(token, callback) {
 
 }
 
+router.get('/whoami', oidc.ensureAuthenticated(), (req, res, next) => {
+  var payload = {
+    profile: {
+    }
+  }
+
+  
+  res.send(JSON.stringify(req.userContext.userinfo.sub));
+});
 
 router.get('/accountPage', oidc.ensureAuthenticated(), (req, res, next) => {
   //console.log("/accountPage");
