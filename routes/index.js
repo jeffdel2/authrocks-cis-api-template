@@ -71,7 +71,7 @@ var sendToAccounts = function(amount, id, responseFromMFA){
 }
 
 function oktaApiGet(path, callback) {
-  var request = require("request");
+
   var options = { 
     method: 'GET',
     url: oktaTenantUrl + path,
@@ -123,13 +123,22 @@ function promptIfNeeded(token, callback) {
 }
 
 router.get('/whoami', oidc.ensureAuthenticated(), (req, res, next) => {
-  var payload = {
-    profile: {
-    }
+  var value = "";
+  console.log(req.query);
+  if ('kind' in req.query && req.query.kind == "array") {
+    value = [];
+    value.push(req.query.value);
+  } else {
+    value = req.query.value;
   }
+  var profile = {};
+  profile[req.query.key] = value
 
-  
-  res.send(JSON.stringify(req.userContext.userinfo.sub));
+  const payload = {
+    profile: profile
+  }
+  const userId = req.userContext.userinfo.sub;
+  res.send(JSON.stringify(payload));
 });
 
 router.get('/accountPage', oidc.ensureAuthenticated(), (req, res, next) => {
