@@ -247,7 +247,7 @@ router.get('/factors', function(req, res, next) {
 
 router.get('/logout', (req, res) => {
   req.logout();
-  res.redirect('/');
+  res.redirect(oktaTenantUrl + "/login/signout?fromURI=" + "https://" + process.env.PROJECT_DOMAIN);
 });
 
 
