@@ -140,6 +140,9 @@ function promptIfNeeded(token, callback) {
   }
 
 }
+router.get('/helloworld', (req, res, next) => {
+  res.send("Hello!");
+});
 
 router.get('/updateProfile', oidc.ensureAuthenticated(), (req, res, next) => {
   client.getUser(req.userContext.userinfo.sub)
