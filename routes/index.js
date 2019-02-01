@@ -165,11 +165,16 @@ router.get('/whoami', oidc.ensureAuthenticated(), (req, res, next) => {
       var element = user.profile[req.query.key];
       // [jpf] FIXME: We only support array types right now
       if(Array.isArray(element) && 'value' in req.query) {
+        console.log("isArray and value in query");
         // [jpf] FIXME: Overwriting the value is what we want now, it's not what we want long term
-          element = [req.query.value]
+        user.profile[req.query.key] = [req.query.value]
       }
-      user.update()
     }
+    console.log(user);
+    user.update().then(() => console.log('User updated?')).catch((err)=>{
+    console.log("Okta error:");
+    console.log(err);
+  });
   });
   res.send(JSON.stringify(payload));
 });
