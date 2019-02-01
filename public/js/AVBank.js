@@ -46,22 +46,15 @@ $(document).ready(function () {
       //empty string means no validation error
   }
   
-  var branchPrompt = new Vue({
-    el: '#branchPrompt',
-    data: {
-      message: "HEllo world",
-      branches: ["aye", "bee", "see"],
-      seen: false,
-    }
-  });
-  
-  
+  // Handle changes to the progressive profiling "userPrompt" dialog
   $("#userPrompt").change(function(e) {
     e.stopImmediatePropagation();
     console.log("New item selected:");
     $( "#userPrompt select option:selected" ).each(function() {
-      console.log($( this ).context.value);
-      x = $(this);
+      $.get("/updateProfile", {
+        attributeToChange: $( this ).context.parentElement.id,
+        attributeValue: $( this ).context.value,
+      });
     });
   });
   
@@ -82,17 +75,14 @@ function jwtPP(token, part = 0) {
 var access_token = authClient.tokenManager.get("accessToken").accessToken;
 var id_token     = authClient.tokenManager.get("idToken").idToken;
 
-  
-  tokenModal.cards = [
-    {
-      "name": "id_token",
-      "jwt": id_token,
-    },
-    {
-      "name": "access_token",
-      "jwt": access_token
-    },
-  ]
+tokenModal.cards = [
+  {
+    "name": "id_token",
+    "jwt": id_token,
+  },
+  {
+    "name": "access_token",
+    "jwt": access_token
+  },
+]
 // End Token Viewer Code
-
-var x;

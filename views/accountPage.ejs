@@ -19,7 +19,7 @@
   <div class="alert alert-warning alert-dismissible fade show" role="alert" id="userPrompt">
     <%= locals.userPrompt.description %>
     <form class="col-sm-2 d-inline-block">
-      <select class="form-control">
+      <select class="form-control" id="<%= locals.userPrompt.key %>">
         <% for(var i=0; i < locals.userPrompt.options.length; i++) { %>
         <option value="<%= locals.userPrompt.options[i].const %>">
           <%= locals.userPrompt.options[i].title %>
