@@ -119,6 +119,10 @@ new Vue({
   beforeMount(){
     this.loadFactors()
     // this.postFactors()
+    var currentPage = window.location.href
+    if(cur){
+       
+    }
     var signIn = new OktaSignIn({
       baseUrl: 'https://avb.oktapreview.com',
       i18n: {
