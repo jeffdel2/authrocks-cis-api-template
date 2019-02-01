@@ -119,11 +119,9 @@ new Vue({
   beforeMount(){
     this.loadFactors()
     // this.postFactors()
-    var currentPage = window.location.href
-    if(cur){
-       
-    }
-    var signIn = new OktaSignIn({
+    var currentHref = window.location.href.toString()
+    if(!currentHref.includes("about")) {
+      var signIn = new OktaSignIn({
       baseUrl: 'https://avb.oktapreview.com',
       i18n: {
         en: {
@@ -143,6 +141,8 @@ new Vue({
         console.log(err)
       }
     );
+    }
+ 
 
   }
 });
