@@ -33,6 +33,7 @@ const oktaJwtVerifier = new OktaJwtVerifier({
   issuer: process.env.issuer
 })
 
+// FIXME: It's painful that this doesn't support all of the features that we want. Look into a way to either extend the SDK, or move everything to my hack below
 const okta = require('@okta/okta-sdk-nodejs');
 
 const client = new okta.Client({
@@ -95,6 +96,7 @@ router.get('/', function(req, res, next) {
 
 
 function promptIfNeeded(token, callback) {
+  
   const opt = token.opt;
   var userPrompt = false;
   console.log("opt contains:");

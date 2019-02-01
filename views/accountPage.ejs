@@ -14,12 +14,14 @@
 <div class="services-bot-agile2 py-sm-5 py-3">
   
   <!-- Start User Prompt -->
+  <!-- Use locals.user here to avoid an error if "user" isn't defined. -->
+  <% if(locals.userPrompt){ %>
   <div class="alert alert-warning alert-dismissible fade show" role="alert" id="userPrompt">
-    <%= userPrompt.description %>
+    <%= locals.userPrompt.description %>
     <form class="col-sm-2 d-inline-block">
       <select class="form-control">
-        <% for(var i=0; i < userPrompt.options.length; i++) { %>
-        <option><%= userPrompt.options[i].title %></option>
+        <% for(var i=0; i < locals.userPrompt.options.length; i++) { %>
+        <option><%= locals.userPrompt.options[i].title %></option>
         <% } %>
       </select>
     </form>
@@ -27,6 +29,7 @@
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
+  <% } %>
   <!-- End User Prompt -->
   
   <button type="button" class="btn btn-danger btn-lg float-right av-button" onclick="openAccount()">Open Account</button>
