@@ -161,7 +161,15 @@ router.get('/whoami', oidc.ensureAuthenticated(), (req, res, next) => {
   
   client.getUser(req.userContext.userinfo.sub)
   .then(user => {
-    console.log(user.profile);
+    if('key' in req.query && req.query.key in user.profile) {
+      var element = user.profile[req.query.key];
+      // [jpf] FIXME: We only support array types right now
+      if(Array.isArray(element) && 'value' in req.query) {
+        // [jpf] FIXME: Overwriting the value is what we want now, it's not what we want long term
+          element = [req.query.value]
+      }
+      user.update()
+    }
   });
   res.send(JSON.stringify(payload));
 });
