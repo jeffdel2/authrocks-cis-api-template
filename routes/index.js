@@ -104,13 +104,15 @@ function promptIfNeeded(token, callback) {
       
       userPrompt = [];
       token.opt.forEach(function(key) {
-        // FIXME: pull this dynamically
         const schema = result.definitions.custom.properties[key]; 
         userPrompt.push({
           description: schema.description,
           options: schema.items.oneOf,
         });
       });
+      // FIXME: This forces the userPrompt variable to have the _last_ element listed
+      //        Ideally this should also be an array of every element we want to prompt for
+      userPrompt = userPrompt.slice(-1)[0]; // "userPrompt.last()"
       console.log(userPrompt);
       callback(userPrompt)
     });
