@@ -140,43 +140,24 @@ function promptIfNeeded(token, callback) {
 
 }
 
-router.get('/whoami', oidc.ensureAuthenticated(), (req, res, next) => {
-  var value = "";
-  console.log(req.query);
-  if ('kind' in req.query && req.query.kind == "array") {
-    value = [];
-    value.push(req.query.value);
-  } else {
-    value = req.query.value;
-  }
-  var profile = {};
-  profile[req.query.key] = value
-
-  const payload = {
-    profile: profile
-  }
-  
-  
-  const userId = req.userContext.userinfo.sub;
-  
+router.get('/updateProfile', oidc.ensureAuthenticated(), (req, res, next) => {
   client.getUser(req.userContext.userinfo.sub)
   .then(user => {
-    if('key' in req.query && req.query.key in user.profile) {
-      var element = user.profile[req.query.key];
+    if('attributeToChange' in req.query && req.query.attributeToChange in user.profile) {
+      var element = user.profile[req.query.attributeToChange];
       // [jpf] FIXME: We only support array types right now
-      if(Array.isArray(element) && 'value' in req.query) {
-        console.log("isArray and value in query");
+      if(Array.isArray(element)) {
         // [jpf] FIXME: Overwriting the value is what we want now, it's not what we want long term
-        user.profile[req.query.key] = [req.query.value]
+        user.profile[req.query.attributeToChange] = [];
+        if('attributeValue' in req.query && req.query.attributeValue !== '') {
+          user.profile[req.query.attributeToChange].push(req.query.attributeValue);
+        }
       }
     }
     console.log(user);
-    user.update().then(() => console.log('User updated?')).catch((err)=>{
-    console.log("Okta error:");
-    console.log(err);
+    user.update().then(() => console.log('User updated?'));
   });
-  });
-  res.send(JSON.stringify(payload));
+  res.send(204);
 });
 
 router.get('/accountPage', oidc.ensureAuthenticated(), (req, res, next) => {
