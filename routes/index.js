@@ -8,6 +8,7 @@ if(!process.env.CLIENT_ID) {
   process.env.OKTA_URL = "https://example.okta.com";
 }
 
+var request = require("request");
 var express = require('express');
 var router = express.Router();
 const session = require('express-session');
@@ -71,7 +72,6 @@ var sendToAccounts = function(amount, id, responseFromMFA){
 }
 
 function oktaApiGet(path, callback) {
-
   var options = { 
     method: 'GET',
     url: oktaTenantUrl + path,
@@ -86,7 +86,25 @@ function oktaApiGet(path, callback) {
   request(options, function (error, response, body) {
     callback(error, response, body);
   });
-};
+}
+
+function oktaApiPost(path, payload, callback) {
+  var options = { 
+    method: 'POST',
+    url: oktaTenantUrl + path,
+    headers: { 
+      'Cache-Control': 'no-cache',
+      'Authorization': 'SSWS ' + apiToken,
+      'Content-Type': 'application/json',
+      'Accept': 'application/json' 
+    },
+    body: payload
+  };
+
+  request(options, function (error, response, body) {
+    callback(error, response, body);
+  });
+}
 
 
 /* GET home page. */
@@ -137,7 +155,14 @@ router.get('/whoami', oidc.ensureAuthenticated(), (req, res, next) => {
   const payload = {
     profile: profile
   }
+  
+  
   const userId = req.userContext.userinfo.sub;
+  
+  client.getUser(req.userContext.userinfo.sub)
+  .then(user => {
+    console.log(user.profile);
+  });
   res.send(JSON.stringify(payload));
 });
 
