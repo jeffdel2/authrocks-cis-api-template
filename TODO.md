@@ -30,7 +30,7 @@
 - ☐ Move Express code to as few files as possible (or maybe only to what's logical)
 
 # BUG(?)
-- ☐ Token Viewer to work under all login situations
+- ☐ Token Viewer seems to display tokens from prior login. I was updating the custom claims in the APIAM hook, and noticed that the changes to the tokens only showed up after I logged out and logged in twice. Easier to show than to explain...
 
 # Lower priority
 - ☐ Fix /maintenance
