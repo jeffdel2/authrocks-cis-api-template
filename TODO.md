@@ -29,6 +29,9 @@
 - ☐ Reduce the variables needed `.env` 
 - ☐ Move Express code to as few files as possible (or maybe only to what's logical)
 
+# BUG(?)
+- ☐ Token Viewer to work under all login situations
+
 # Lower priority
 - ☐ Fix /maintenance
 - ☐ DRY up routes/index.js
