@@ -63,8 +63,9 @@ function jwtPP(token, part = 0) {
   return jsonPP(rawJson);
 }
 
-var access_token = authClient.tokenManager.get("accessToken").accessToken;
-var id_token     = authClient.tokenManager.get("idToken").idToken;
+// 'tokens' is defined in header.ejs
+var access_token = tokens.access_token;
+var id_token     = tokens.id_token;
 
 tokenModal.cards = [
   {

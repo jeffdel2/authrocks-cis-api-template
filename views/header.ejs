@@ -50,7 +50,14 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     tokenManager: {
       storage: 'sessionStorage'
     },
-};
+  };
+    
+  <% if(locals.tokens){ %>
+  var tokens = {
+    access_token: '<%= tokens.access_token %>',
+    id_token: '<%= tokens.id_token %>',
+  };
+  <% } %>
   </script>
 </head>
 
