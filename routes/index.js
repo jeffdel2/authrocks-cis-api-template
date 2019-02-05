@@ -116,6 +116,7 @@ router.get('/', function(req, res, next) {
 function promptIfNeeded(token, callback) {
   var userPrompt = false;
   if('opt' in token && token.opt.length > 0) {
+      // FIXME: Set a unique UserAgent for this, so we can see if it's being used
       oktaApiGet('/api/v1/meta/schemas/user/default', function(error, response, body) {
       var result = JSON.parse(body);
       console.log("Okta Schema");
