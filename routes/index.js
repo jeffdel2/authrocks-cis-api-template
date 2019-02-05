@@ -169,7 +169,11 @@ router.get('/updateProfile', oidc.ensureAuthenticated(), (req, res, next) => {
 
 router.get('/accountPage', oidc.ensureAuthenticated(), (req, res, next) => {
   //console.log("/accountPage");
-  //console.log(req.userContext.tokens.access_token);
+  // console.log(req.userContext.tokens);
+  var tokens = {
+    access_token: req.userContext.tokens.access_token,
+    id_token: req.userContext.tokens.id_token,
+  };
   
   oktaJwtVerifier.verifyAccessToken(req.userContext.tokens.access_token)
   .catch(jwt => {
@@ -178,7 +182,7 @@ router.get('/accountPage', oidc.ensureAuthenticated(), (req, res, next) => {
     var userPrompt = false;
     
     promptIfNeeded(jwt.parsedBody, function (userPrompt) {
-      res.render('accountPage', { user: req.userContext, userPrompt: userPrompt });
+      res.render('accountPage', { user: req.userContext, userPrompt: userPrompt, tokens: tokens });
     });
   });
 });
