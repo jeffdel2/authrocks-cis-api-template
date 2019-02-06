@@ -112,6 +112,10 @@ router.get('/', function(req, res, next) {
   res.render('index', { user: req.userContext });
 });
 
+router.get('/apiintro', function(req, res, next) {
+  res.render('apiintro');
+});
+
 
 function promptIfNeeded(token, callback) {
   var userPrompt = false;
