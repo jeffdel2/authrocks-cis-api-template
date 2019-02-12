@@ -112,6 +112,10 @@ router.get('/', function(req, res, next) {
   res.render('index', { user: req.userContext });
 });
 
+router.get('/howto', function(req, res, next) {
+  res.render('howto');
+});
+
 router.get('/apiintro', function(req, res, next) {
   res.render('apiintro');
 });
