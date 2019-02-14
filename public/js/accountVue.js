@@ -102,7 +102,7 @@ new Vue({
   ,
   methods: {
     loadFactors: function() {
-      this.$http.get('https://avbank.glitch.me/factors')
+      this.$http.get(window.location.origin + '/factors')
       .then(response => {
         this.factors = response.body
         $(".button-primary").css("background", "linear-gradient(red, #f00000)");
@@ -111,7 +111,7 @@ new Vue({
     },
     postFactors: function() {
       console.log("test")
-      this.$http.post('https://avbank.glitch.me/factorsTest').then(response => {
+      this.$http.post(window.location.origin + '/factorsTest').then(response => {
         console.log(response.body)
       })
     }
