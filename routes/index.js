@@ -20,7 +20,7 @@ const oidc = new ExpressOIDC({
   client_id: process.env.CLIENT_ID,
   client_secret: process.env.CLIENT_SECRET,
   redirect_uri: "https://" + process.env.PROJECT_DOMAIN + ".glitch.me/authorization-code/callback",
-  scope: 'openid profile'
+  scope: 'openid profile admin'
 });
 
 
