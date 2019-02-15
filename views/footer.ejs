@@ -164,7 +164,6 @@ authClient.session.get()
 });
 
 var do_login = function() {
-  
   authClient.signIn({
     username: $("input[name='Name']").val(),
     password: $("input[name='Password']").val()
@@ -173,18 +172,33 @@ var do_login = function() {
     if (transaction.status === 'SUCCESS') {
       // Step #1: get sessionToken
       console.log('sessionToken = ', transaction.sessionToken);
-
       authClient.session.setCookieAndRedirect(transaction.sessionToken, window.location.origin + "/accountPage");
 
     } else {
-      throw 'We cannot handle the ' + transaction.status + ' status';
+      console.log(transaction)
+      var smsFactor = transaction.factors.find(function(factor) {
+        return factor.provider === 'OKTA' && factor.factorType === 'sms';
+      });
+      $("#authJsMfaModal").modal("show")
+      smsFactor.verify(); // sends otp code to andrew
+      $('#authJsMfaModal').on('shown.bs.modal', function (e) {
+        $("#exampleModal").modal("hide")
+          $("body").on("submit", "#authJsMfaModalForm", function(e) {
+            e.preventDefault();
+            var code = $("#authOtpCode").val()
+            var result= smsFactor.verify({
+              passCode: code
+            }).then(function(session) {
+              authClient.session.setCookieAndRedirect(session.sessionToken, window.location.origin + "/accountPage");
+            })
+        })
+      })
     }
   })
   .fail(function(err) {
     console.error(err);
   });
 }
-
   
           </script>
 					<form id="loginForm">
