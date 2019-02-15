@@ -35,7 +35,7 @@
   <!-- End User Prompt -->
   
   <button type="button" class="btn btn-danger btn-lg float-right av-button" onclick="openAccount()">Open Account</button>
-  <% if(locals.user){ %>
+  <% if(locals.user.userinfo.admin){ %>
        <button type="button" class="btn btn-danger btn-lg float-right av-button" onclick="openAccount()">Admin</button>
   <% } %>
   <button type="button" class="btn btn-danger btn-lg float-right av-button" data-toggle="modal" data-target="#tokenModal">View Tokens</button>
