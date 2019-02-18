@@ -6,7 +6,7 @@ authClient.session.get().then(function(session) {
 
   authClient.token.getWithoutPrompt({
     responseType: ["id_token", "token"],
-    scopes: ["openid", "email", "admin"] // or array of types// optional if the user has an existing Okta session
+    scopes: ["openid", "email"] // or array of types// optional if the user has an existing Okta session
   }).then(function(tokens) {
     console.log("Got tokens:");
     console.log(tokens);
