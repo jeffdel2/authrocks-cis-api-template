@@ -147,8 +147,8 @@ function promptIfNeeded(token, callback) {
   } else {
     callback(userPrompt);
   }
-
 }
+
 router.get('/helloworld', (req, res, next) => {
   res.send("Hello!");
 });
