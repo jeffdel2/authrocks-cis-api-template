@@ -39,7 +39,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-var oktaConfig = require('config.json')('./oktaconfig.json');
+// var oktaConfig = require('config.json')('./oktaconfig.json');
 
 const session = require('express-session');
 const { ExpressOIDC } = require('@okta/oidc-middleware');
