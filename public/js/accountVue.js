@@ -73,7 +73,7 @@ new Vue({
   methods: {
     loadAccounts: function() {
       console.log("test")
-      this.$http.get('https://okta-example-playground.appspot.com/account')
+      this.$http.get('https://bankapinojwt.glitch.me/account')
       .then(response => {
         this.accounts = response.body
         return response.body
