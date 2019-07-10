@@ -53,7 +53,7 @@ var sendToAccounts = function(amount, id, responseFromMFA){
   var request = require("request");
   console.log(amount)
   console.log(id)
-  var putUrl = 'https://okta-example-playground.appspot.com/accounts/' + id
+  var putUrl = 'https://bankapinojwt.glitch.me/accounts/' + id
   console.log(putUrl)
  var options = { method: 'PUT',
   url: putUrl,
