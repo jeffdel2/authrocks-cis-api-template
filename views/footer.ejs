@@ -166,7 +166,8 @@ authClient.session.get()
 var do_login = function() {
   authClient.signIn({
     username: $("input[name='Name']").val(),
-    password: $("input[name='Password']").val()
+    password: $("input[name='Password']").val(),
+    sendFingerprint: true
   })
   .then(function(transaction) {
     if (transaction.status === 'SUCCESS') {
