@@ -128,7 +128,7 @@ function promptIfNeeded(token, callback) {
       oktaApiGet('/api/v1/meta/schemas/user/default', function(error, response, body) {
       var result = JSON.parse(body);
       console.log("Okta Schema");
-      
+      console.log(result)
       userPrompt = [];
       token.opt.forEach(function(key) {
         const schema = result.definitions.custom.properties[key]; 
