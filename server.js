@@ -6,6 +6,7 @@ app.get('/', (req, res) => {
     res.send('This is the Fun Auth API');
 });
 
+
 app.get('/api/public', (req, res) => {
     let results = {
       "success": true,
@@ -15,6 +16,7 @@ app.get('/api/public', (req, res) => {
     res.end(JSON.stringify(results));
 });
 
+
 app.get('/api/private', (req, res) => {
     let results = {
       "success": true,
@@ -23,6 +25,7 @@ app.get('/api/private', (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     res.end(JSON.stringify(results));
 });
+
 
 app.get('/api/access', (req, res) => {
     let results = {
@@ -35,31 +38,35 @@ app.get('/api/access', (req, res) => {
 
 
 app.post('/api/access-hook', (req, res) => {
+    let auth = req.get('Authorization');
+  
+    
   
     let results = {
-          "commands": [
+      "commands": [
+        {
+          "type": "com.okta.identity.patch",
+          "value": [
             {
-              "type": "com.okta.identity.patch",
-              "value": [
-                {
-                  "op": "add",
-                  "path": "/claims/account_number",
-                  "value": "F0" + between(1000, 9999) + "-" + between(1000, 9999)
-                }
-              ]
-            },
-            {
-              "type": "com.okta.access.patch",
-              "value": [
-                {
-                  "op": "add",
-                  "path": "/claims/access",
-                  "value": "GRANTED"
-                }
-              ]
+              "op": "add",
+              "path": "/claims/account_number",
+              "value": "F0" + between(1000, 9999) + "-" + between(1000, 9999)
             }
           ]
-        };
+        },
+        {
+          "type": "com.okta.access.patch",
+          "value": [
+            {
+              "op": "add",
+              "path": "/claims/access",
+              "value": "GRANTED"
+            }
+          ]
+        }
+      ]
+    };
+
     res.setHeader('Content-Type', 'application/json');
     res.end(JSON.stringify(results));
 });
