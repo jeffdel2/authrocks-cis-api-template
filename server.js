@@ -2,6 +2,8 @@ const express = require('express');
 const app = express();
 const port = 3000;
 
+const OKTA_HOOK_AUTH = "1234567890";
+
 app.get('/', (req, res) => {
     res.send('This is the Fun Auth API');
 });
@@ -39,33 +41,41 @@ app.get('/api/access', (req, res) => {
 
 app.post('/api/access-hook', (req, res) => {
     let auth = req.get('Authorization');
-  
+    let results = {}
     
+    if(auth == OKTA_HOOK_AUTH) {
   
-    let results = {
-      "commands": [
-        {
-          "type": "com.okta.identity.patch",
-          "value": [
-            {
-              "op": "add",
-              "path": "/claims/account_number",
-              "value": "F0" + between(1000, 9999) + "-" + between(1000, 9999)
-            }
-          ]
-        },
-        {
-          "type": "com.okta.access.patch",
-          "value": [
-            {
-              "op": "add",
-              "path": "/claims/access",
-              "value": "GRANTED"
-            }
-          ]
-        }
-      ]
-    };
+      results = {
+        "commands": [
+          {
+            "type": "com.okta.identity.patch",
+            "value": [
+              {
+                "op": "add",
+                "path": "/claims/account_number",
+                "value": "F0" + between(1000, 9999) + "-" + between(1000, 9999)
+              }
+            ]
+          },
+          {
+            "type": "com.okta.access.patch",
+            "value": [
+              {
+                "op": "add",
+                "path": "/claims/access",
+                "value": "GRANTED"
+              }
+            ]
+          }
+        ]
+      };
+    } else {
+      results = {
+        "success": false,
+        "message": "Requires Auth to call this hook."
+      }
+      res.status(403);
+    }
 
     res.setHeader('Content-Type', 'application/json');
     res.end(JSON.stringify(results));
