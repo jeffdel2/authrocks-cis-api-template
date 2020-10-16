@@ -1,8 +1,15 @@
 const express = require('express');
+const OktaJwtVerifier = require('@okta/jwt-verifier');
 const app = express();
 const port = 3000;
 
 const OKTA_HOOK_AUTH = "1234567890";
+const OKTA_AUTH_SERVER_AUDIENCE = "api://default";
+
+
+const oktaJwtVerifier = new OktaJwtVerifier({
+  issuer: 'https://{yourOktaDomain}/oauth2/default' // required
+});
 
 app.get('/', (req, res) => {
     res.send('This is the Fun Auth API');
@@ -20,10 +27,32 @@ app.get('/api/public', (req, res) => {
 
 
 app.get('/api/private', (req, res) => {
-    let results = {
-      "success": true,
-      "message": "This is the private API, Only a valid Okta JWT with a corresponding auth server can see this"
+    let auth = req.get('Authorization');
+    let accessTokenString = null;
+    var results = {};
+  
+    if(auth) {
+      accessTokenString = auth.replace("Bearer ", "");
     }
+  
+    oktaJwtVerifier.verifyAccessToken(accessTokenString, OKTA_AUTH_SERVER_AUDIENCE)
+    .then(jwt => {
+      // the token is valid (per definition of 'valid' above)
+      console.log(jwt.claims);
+      results = {
+        "success": true,
+        "message": "This is the private API, Only a valid Okta JWT with a corresponding auth server can see this"
+      }
+    })
+    .catch(err => {
+      // a validation failed, inspect the error
+      results = {
+        "success": false,
+        "message": "This is the private API and the token is invalid!"
+      }
+      res.status(403);
+    });
+  
     res.setHeader('Content-Type', 'application/json');
     res.end(JSON.stringify(results));
 });
