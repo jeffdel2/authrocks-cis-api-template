@@ -5,10 +5,12 @@ const port = 3000;
 
 const OKTA_HOOK_AUTH = "1234567890";
 const OKTA_AUTH_SERVER_AUDIENCE = "api://default";
-
+const OKTA_ISSUER = "https://mr2.oktapreview.com/oauth2/default'";
+const OKTA_CLIENT_ID = "0oau05aan8tvv5p540h7";
 
 const oktaJwtVerifier = new OktaJwtVerifier({
-  issuer: 'https://{yourOktaDomain}/oauth2/default' // required
+  issuer: OKTA_ISSUER,
+  clientId: OKTA_CLIENT_ID
 });
 
 app.get('/', (req, res) => {
@@ -28,8 +30,8 @@ app.get('/api/public', (req, res) => {
 
 app.get('/api/private', (req, res) => {
     let auth = req.get('Authorization');
-    let accessTokenString = null;
-    var results = {};
+    let accessTokenString = "";
+    let results = {};
   
     if(auth) {
       accessTokenString = auth.replace("Bearer ", "");
@@ -46,6 +48,8 @@ app.get('/api/private', (req, res) => {
     })
     .catch(err => {
       // a validation failed, inspect the error
+      console.log(err);
+      
       results = {
         "success": false,
         "message": "This is the private API and the token is invalid!"
