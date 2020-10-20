@@ -5,7 +5,7 @@ const port = 3000;
 
 const OKTA_HOOK_AUTH = "1234567890";
 const OKTA_AUTH_SERVER_AUDIENCE = "api://default";
-const OKTA_ISSUER = "https://mr2.oktapreview.com/oauth2/default'";
+const OKTA_ISSUER = "https://mr2.oktapreview.com/oauth2/default";
 const OKTA_CLIENT_ID = "0oau05aan8tvv5p540h7";
 
 const oktaJwtVerifier = new OktaJwtVerifier({
@@ -66,12 +66,47 @@ app.get('/api/private', (req, res) => {
 
 
 app.get('/api/access', (req, res) => {
-    let results = {
-      "success": true,
-      "message": "This is the private API that requires a specifc role to access, Only a valid Okta JWT with the correct claims and a corresponding auth server can see this"
-    }
+    let auth = req.get('Authorization');
+    let accessTokenString = "";
+    let results = {};
+  
     res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(results));
+  
+    if(auth) {
+      accessTokenString = auth.replace("Bearer ", "");
+    }
+  
+    oktaJwtVerifier.verifyAccessToken(accessTokenString, OKTA_AUTH_SERVER_AUDIENCE)
+    .then(jwt => {
+      // the token is valid (per definition of 'valid' above)
+      console.log(jwt.claims);
+      
+      if(jwt.claims["access"] == "GRANTED") {
+        results = {
+          "success": true,
+          "message": "This is the private API that requires a specifc role to access, Only a valid Okta JWT with the correct claims and a corresponding auth server can see this"
+        }  
+      } else {
+        results = {
+          "success": false,
+          "message": "This is the private API that requires a specifc role to access, 'access' claim is missing the 'GRANTED' value."
+        }
+      }
+      
+      res.end(JSON.stringify(results));
+    })
+    .catch(err => {
+      // a validation failed, inspect the error
+      console.log(err);
+      
+      results = {
+        "success": false,
+        "message": "This is the private API and the token is invalid!"
+      }
+      res.status(403);
+      
+      res.end(JSON.stringify(results));
+    });
 });
 
 
