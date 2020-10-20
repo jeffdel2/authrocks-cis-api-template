@@ -33,6 +33,8 @@ app.get('/api/private', (req, res) => {
     let accessTokenString = "";
     let results = {};
   
+    res.setHeader('Content-Type', 'application/json');
+  
     if(auth) {
       accessTokenString = auth.replace("Bearer ", "");
     }
@@ -45,6 +47,8 @@ app.get('/api/private', (req, res) => {
         "success": true,
         "message": "This is the private API, Only a valid Okta JWT with a corresponding auth server can see this"
       }
+      
+      res.end(JSON.stringify(results));
     })
     .catch(err => {
       // a validation failed, inspect the error
@@ -55,10 +59,9 @@ app.get('/api/private', (req, res) => {
         "message": "This is the private API and the token is invalid!"
       }
       res.status(403);
+      
+      res.end(JSON.stringify(results));
     });
-  
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(results));
 });
 
 
