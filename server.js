@@ -1,63 +1,28 @@
 const express = require('express');
 const OktaJwtVerifier = require('@okta/jwt-verifier');
 const endpointHandlers = require('./endpointHandlers.js');
+const config = require('./endpointHandlers.js');
 const app = express();
 const port = 3000;
 
-const OKTA_HOOK_AUTH = "1234567890";
-const OKTA_AUTH_SERVER_AUDIENCE = "api://funAuth";
-const OKTA_ISSUER = "https://mr2.oktapreview.com/oauth2/ausule8ubxCvrphxX0h7";
-const OKTA_CLIENT_ID = "0oau05aan8tvv5p540h7";
-
 const oktaJwtVerifier = new OktaJwtVerifier({
-  issuer: OKTA_ISSUER,
-  clientId: OKTA_CLIENT_ID
+  issuer: config.okta.OKTA_ISSUER,
+  clientId: config.okta.OKTA_CLIENT_ID
 });
 
 
 app.get('/', (req, res) => {
-    endpointHandlers.handlePublicEndpoint(req, res);
+  res.send('This is the Fun Auth API');
 });
 
+
 app.get('/api/public', (req, res) => {
-    
+    endpointHandlers.handlePublicEndpoint(req, res);
 });
 
 
 app.get('/api/private', (req, res) => {
-    let auth = req.get('Authorization');
-    let accessTokenString = "";
-    let results = {};
-  
-    res.setHeader('Content-Type', 'application/json');
-  
-    if(auth) {
-      accessTokenString = auth.replace("Bearer ", "");
-    }
-  
-    oktaJwtVerifier.verifyAccessToken(accessTokenString, OKTA_AUTH_SERVER_AUDIENCE)
-    .then(jwt => {
-      // the token is valid (per definition of 'valid' above)
-      console.log(jwt.claims);
-      results = {
-        "success": true,
-        "message": "This is the private API, Only a valid Okta JWT with a corresponding auth server can see this"
-      }
-      
-      res.end(JSON.stringify(results));
-    })
-    .catch(err => {
-      // a validation failed, inspect the error
-      console.log(err);
-      
-      results = {
-        "success": false,
-        "message": "This is the private API and the token is invalid!"
-      }
-      res.status(403);
-      
-      res.end(JSON.stringify(results));
-    });
+    endpointHandlers.handlePrivateEndpoint(req, res, oktaJwtVerifier);
 });
 
 
@@ -72,7 +37,7 @@ app.get('/api/access', (req, res) => {
       accessTokenString = auth.replace("Bearer ", "");
     }
   
-    oktaJwtVerifier.verifyAccessToken(accessTokenString, OKTA_AUTH_SERVER_AUDIENCE)
+    oktaJwtVerifier.verifyAccessToken(accessTokenString, config.okta.EXPECTED_AUDIENCE)
     .then(jwt => {
       // the token is valid (per definition of 'valid' above)
       console.log(jwt.claims);
@@ -110,7 +75,7 @@ app.post('/api/access-hook', (req, res) => {
     let auth = req.get('Authorization');
     let results = {}
     
-    if(auth == OKTA_HOOK_AUTH) {
+    if(auth == config.okta.OKTA_HOOK_AUTH) {
   
       results = {
         "commands": [

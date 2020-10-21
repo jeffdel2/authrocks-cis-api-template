@@ -1,17 +1,10 @@
+const config = require('./endpointHandlers.js');
+
 /**
  * This is public, anyone can call it
  */
 function handlePublicEndpoint(req, res) {
   console.log("handlePublicEndpoint()");
-  
-  res.send('This is the Fun Auth API');
-}
-
-/**
- * This is private, you need a valid JWT to call it
- */
-function handlePrivateEndpoint(req, res) {
-  console.log("handlePrivateEndpoint()");
   
   let results = {
     "success": true,
@@ -19,7 +12,47 @@ function handlePrivateEndpoint(req, res) {
   }
   res.setHeader('Content-Type', 'application/json');
   res.end(JSON.stringify(results));
+}
+
+/**
+ * This is private, you need a valid JWT to call it
+ */
+function handlePrivateEndpoint(req, res, oktaJwtVerifier) {
+  console.log("handlePrivateEndpoint()");
   
+  let auth = req.get('Authorization');
+  let accessTokenString = "";
+  let results = {};
+
+  res.setHeader('Content-Type', 'application/json');
+
+  if(auth) {
+    accessTokenString = auth.replace("Bearer ", "");
+  }
+
+  oktaJwtVerifier.verifyAccessToken(accessTokenString, config.okta.EXPECTED_AUDIENCE)
+  .then(jwt => {
+    // the token is valid (per definition of 'valid' above)
+    console.log(jwt.claims);
+    results = {
+      "success": true,
+      "message": "This is the private API, Only a valid Okta JWT with a corresponding auth server can see this"
+    }
+
+    res.end(JSON.stringify(results));
+  })
+  .catch(err => {
+    // a validation failed, inspect the error
+    console.log(err);
+
+    results = {
+      "success": false,
+      "message": "This is the private API and the token is invalid!"
+    }
+    res.status(403);
+
+    res.end(JSON.stringify(results));
+  });
 }
 
 /**
