@@ -1,6 +1,7 @@
 const express = require('express');
 const OktaJwtVerifier = require('@okta/jwt-verifier');
 const endpointHandlers = require('./endpointHandlers.js');
+const webHookHandlers = require('./webHookHandlers.js');
 const config = require('./endpointHandlers.js');
 const app = express();
 const port = 3000;
@@ -27,98 +28,13 @@ app.get('/api/private', (req, res) => {
 
 
 app.get('/api/access', (req, res) => {
-    let auth = req.get('Authorization');
-    let accessTokenString = "";
-    let results = {};
-  
-    res.setHeader('Content-Type', 'application/json');
-  
-    if(auth) {
-      accessTokenString = auth.replace("Bearer ", "");
-    }
-  
-    oktaJwtVerifier.verifyAccessToken(accessTokenString, config.okta.EXPECTED_AUDIENCE)
-    .then(jwt => {
-      // the token is valid (per definition of 'valid' above)
-      console.log(jwt.claims);
-      
-      if(jwt.claims["access"] == "GRANTED") {
-        results = {
-          "success": true,
-          "message": "This is the private API that requires a specifc role to access, Only a valid Okta JWT with the correct claims and a corresponding auth server can see this"
-        }  
-      } else {
-        results = {
-          "success": false,
-          "message": "This is the private API that requires a specifc role to access, 'access' claim is missing the 'GRANTED' value."
-        }
-      }
-      
-      res.end(JSON.stringify(results));
-    })
-    .catch(err => {
-      // a validation failed, inspect the error
-      console.log(err);
-      
-      results = {
-        "success": false,
-        "message": "This is the private API and the token is invalid!"
-      }
-      res.status(403);
-      
-      res.end(JSON.stringify(results));
-    });
+
 });
 
 
 app.post('/api/access-hook', (req, res) => {
-    let auth = req.get('Authorization');
-    let results = {}
-    
-    if(auth == config.okta.OKTA_HOOK_AUTH) {
-  
-      results = {
-        "commands": [
-          {
-            "type": "com.okta.identity.patch",
-            "value": [
-              {
-                "op": "add",
-                "path": "/claims/account_number",
-                "value": "F0" + between(1000, 9999) + "-" + between(1000, 9999)
-              }
-            ]
-          },
-          {
-            "type": "com.okta.access.patch",
-            "value": [
-              {
-                "op": "add",
-                "path": "/claims/access",
-                "value": "GRANTED"
-              }
-            ]
-          }
-        ]
-      };
-    } else {
-      results = {
-        "success": false,
-        "message": "Requires Auth to call this hook."
-      }
-      res.status(403);
-    }
-
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(results));
+    webHookHandlers.tokenHandler(req, res);
 });
-
-
-function between(min, max) {  
-  return Math.floor(
-    Math.random() * (max - min) + min
-  )
-}
 
 
 app.listen(port, () => console.log(`Hello world app listening on port ${port}!`))
