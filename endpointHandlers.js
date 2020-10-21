@@ -1,10 +1,10 @@
 const config = require('./config.js');
 
-/**
- * This is public, anyone can call it
- */
 
 module.exports = {
+  /**
+   * This is public, anyone can call it
+   */
   handlePublic: function (req, res) {
     console.log("handlePublicEndpoint()");
 

@@ -1,4 +1,4 @@
-const config = require('./endpointHandlers.js');
+const config = require('./config.js');
 const utils = require('./utils.js');
 
 module.exports = {
@@ -6,6 +6,8 @@ module.exports = {
     console.log("webHookHandlers.tokenHandler()");
     let auth = req.get('Authorization');
     let results = {}
+    
+    console.log("auth: " + auth + " config.OKTA_HOOK_AUTH: " + config.OKTA_HOOK_AUTH);
 
     if(auth == config.OKTA_HOOK_AUTH) {
 
