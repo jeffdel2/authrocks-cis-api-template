@@ -1,8 +1,10 @@
 const express = require('express');
 const OktaJwtVerifier = require('@okta/jwt-verifier');
+
+const config = require('./config.js');
 const endpointHandlers = require('./endpointHandlers.js');
 const webHookHandlers = require('./webHookHandlers.js');
-const config = require('./config.js');
+
 const app = express();
 const port = 3000;
 
