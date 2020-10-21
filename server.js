@@ -1,5 +1,6 @@
 const express = require('express');
 const OktaJwtVerifier = require('@okta/jwt-verifier');
+const endpointHandlers = require('./endpointHandlers.js');
 const app = express();
 const port = 3000;
 
@@ -13,18 +14,13 @@ const oktaJwtVerifier = new OktaJwtVerifier({
   clientId: OKTA_CLIENT_ID
 });
 
+
 app.get('/', (req, res) => {
-    res.send('This is the Fun Auth API');
+    endpointHandlers.handlePublicEndpoint(req, res);
 });
 
-
 app.get('/api/public', (req, res) => {
-    let results = {
-      "success": true,
-      "message": "This is the Public API, Anyone can request this"
-    }
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(results));
+    
 });
 
 

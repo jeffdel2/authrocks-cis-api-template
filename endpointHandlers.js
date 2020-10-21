@@ -13,10 +13,17 @@ function handlePublicEndpoint(req, res) {
 function handlePrivateEndpoint(req, res) {
   console.log("handlePrivateEndpoint()");
   
+  let results = {
+    "success": true,
+    "message": "This is the Public API, Anyone can request this"
+  }
+  res.setHeader('Content-Type', 'application/json');
+  res.end(JSON.stringify(results));
+  
 }
 
 /**
- * This is 
+ * This is private, you will need a valid JWT AND requires a specific claim in the JWT to access this endpoint
  */
 function handleAccessEndpoint(req, res) {
   console.log("handleAccessEndpoint()");
