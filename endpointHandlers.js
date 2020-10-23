@@ -81,12 +81,12 @@ module.exports = {
       if(jwt.claims["access"] == "GRANTED") {
         results = {
           "success": true,
-          "message": "This is the private API that requires a specifc role to access, Only a valid Okta JWT with the correct claims and a corresponding auth server can see this"
+          "message": "This is the private API that requires a specific role to access, Only a valid Okta JWT with the correct claims and a corresponding auth server can see this"
         }  
       } else {
         results = {
           "success": false,
-          "message": "This is the access API that requires a specifc role to access, 'access' claim is missing the 'GRANTED' value."
+          "message": "This is the access API that requires a specific role to access, 'access' claim is missing the 'GRANTED' value."
         }
       }
 
