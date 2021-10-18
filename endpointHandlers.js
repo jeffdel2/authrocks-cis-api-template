@@ -89,7 +89,6 @@ module.exports = {
           "message": "This is the access API that requires a specific role to access, 'access' claim is missing the 'GRANTED' value."
         }
       }
-
       res.end(JSON.stringify(results));
     })
     .catch(err => {
