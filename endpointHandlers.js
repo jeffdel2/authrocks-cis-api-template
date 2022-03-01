@@ -2,6 +2,10 @@ const config = require('./config.js');
 
 
 module.exports = {
+  
+  
+  
+  
   /**
    * This is public, anyone can call it
    */
@@ -16,6 +20,11 @@ module.exports = {
     res.end(JSON.stringify(results));
   },
 
+  
+  
+  
+  
+  
   /**
    * This is private, you need a valid JWT to call it
    */
@@ -57,6 +66,10 @@ module.exports = {
     });
   },
 
+  
+  
+  
+  
   /**
    * This is private, you will need a valid JWT AND requires a specific claim in the JWT to access this endpoint
    */
