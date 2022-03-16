@@ -17,7 +17,7 @@ const oktaJwtVerifier = new OktaJwtVerifier({
 
 
 app.get('/', (req, res) => {
-  res.send('This is the funAuth API');
+  res.send('This is the token hook API');
 });
 
 
