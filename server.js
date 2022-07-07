@@ -31,6 +31,11 @@ app.get('/api/private', (req, res) => {
 });
 
 
+app.get('/api/scoped', (req, res) => {
+    endpointHandlers.handleScoped(req, res, oktaJwtVerifier);
+});
+
+
 app.get('/api/access', (req, res) => {
   endpointHandlers.handleAccess(req, res, oktaJwtVerifier);
 });

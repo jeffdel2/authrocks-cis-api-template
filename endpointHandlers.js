@@ -67,7 +67,53 @@ module.exports = {
   },
 
   
-  
+    /**
+   * This is private, you will need a valid JWT AND requires a specific claim containing a Login.gov source attribute in the JWT to access this endpoint
+   */
+  handleScoped: function (req, res, oktaJwtVerifier) {
+    console.log("handleScopedEndpoint()");
+
+    let auth = req.get('Authorization');
+    let accessTokenString = "";
+    let results = {};
+
+    res.setHeader('Content-Type', 'application/json');
+
+    if(auth) {
+      accessTokenString = auth.replace("Bearer ", "");
+    }
+
+    oktaJwtVerifier.verifyAccessToken(accessTokenString, config.EXPECTED_AUDIENCE)
+    .then(jwt => {
+      // the token is valid (per definition of 'valid' above)
+      console.log(jwt.claims);
+
+      if(jwt.claims["login_aal"] == "urn:gov:gsa:ac:classes:sp:PasswordProtectedTransport:duo") {
+        results = {
+          "success": true,
+          "message": "This is the Private API that requires a Login.gov sourced attribute, Only a valid Okta JWT with the correct claims and a corresponding auth server can see this"
+        }  
+      } else {
+        results = {
+          "success": false,
+          "message": "This is the Login API that requires a specific role to access, 'login_aal' claim is missing the 'AAL2' value."
+        }
+      }
+      res.end(JSON.stringify(results));
+    })
+    .catch(err => {
+      // a validation failed, inspect the error
+      console.log(err);
+
+      results = {
+        "success": false,
+        "message": "This is the Login API and the token is invalid!"
+      }
+      res.status(403);
+
+      res.end(JSON.stringify(results));
+    });
+  },
   
   
   /**
