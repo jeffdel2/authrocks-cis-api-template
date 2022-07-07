@@ -88,15 +88,15 @@ module.exports = {
       // the token is valid (per definition of 'valid' above)
       console.log(jwt.claims);
 
-      if(jwt.claims["login_aal"] == "urn:gov:gsa:ac:classes:sp:PasswordProtectedTransport:duo") {
+      if(jwt.claims["groupsclaim"] == "testClaimGroup") {
         results = {
           "success": true,
-          "message": "This is the Private API that requires a Login.gov sourced attribute, Only a valid Okta JWT with the correct claims and a corresponding auth server can see this"
+          "message": "This Private API requires a claim driven by a custom scope, only a valid Okta JWT with the correct claim can see this"
         }  
       } else {
         results = {
           "success": false,
-          "message": "This is the Login API that requires a specific role to access, 'login_aal' claim is missing the 'AAL2' value."
+          "message": "This Private API that requires a specific claim to access, please request the appropriate access"
         }
       }
       res.end(JSON.stringify(results));
