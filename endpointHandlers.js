@@ -88,7 +88,7 @@ module.exports = {
       // the token is valid (per definition of 'valid' above)
       console.log(jwt.claims);
 
-      if(jwt.claims["groupsclaim"] == "testClaimGroup") {
+      if(jwt.claims["groupclaim"] == "testClaimGroup") {
         results = {
           "success": true,
           "message": "This Private API requires a claim driven by a custom scope, only a valid Okta JWT with the correct claim can see this"
@@ -107,7 +107,7 @@ module.exports = {
 
       results = {
         "success": false,
-        "message": "This is the Login API and the token is invalid!"
+        "message": "This is a Scoped API and the token is invalid!"
       }
       res.status(403);
 
