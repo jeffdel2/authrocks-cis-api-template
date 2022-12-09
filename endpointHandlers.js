@@ -29,9 +29,10 @@ module.exports = {
    * This is private, you need a valid JWT to call it
    */
   handlePrivate: function (req, res, oktaJwtVerifier) {
-    console.log("handlePrivateEndpoint()");
+    console.log("-------handlePrivateEndpoint()--------");
 
     let auth = req.get('Authorization');
+    console.log(auth);
     let accessTokenString = "";
     let results = {};
 
