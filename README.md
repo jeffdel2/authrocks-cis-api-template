@@ -6,7 +6,6 @@ It is part of the Auth Rocks CIS developer workshop presented by [Okta](https://
 
 ```json
 {
-  "EXPECTED_AUDIENCE": "Enter CIS Authorization Server audience here",
   "OKTA_ISSUER": "Enter CIS Authorization Server Issuer here",
   "OKTA_CLIENTID": "Enter AuthRocks UI application Client ID here"
 }
