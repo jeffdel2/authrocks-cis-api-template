@@ -14,11 +14,9 @@ It is part of the Auth Rocks CIS developer workshop presented by [Okta](https://
 
 ### Challenge 2
 
-1. Copy the **expected audience** from the worksheet and paste in the **config.json** file.
+1. Copy the **Okta Issuer** from the worksheet and paste in the **config.js** file.
 
-2. Copy the **Okta Issuer** from the worksheet and paste in the **config.json** file.
-
-2. Copy the **Okta Client ID** from the worksheet and paste in the **config.json** file.
+2. Copy the **Okta Client ID** from the worksheet and paste in the **config.js** file.
 
 
 ---
